@@ -3,45 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>åçç» BI æ°å­çæ¿</title>
+<title>品牌组 BI 数字看板</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *,::before,::after{box-sizing:border-box}
-html,body{margin:0;padding:0;font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:#04070f;color:#f4f7ff;min-height:100vh}
+html,body{margin:0;padding:0;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#04070f;color:#f4f7ff;min-height:100vh}
 :root{--bg:#04070f;--panel:#0b101c;--card:#0f1524;--card2:#111a2d;--border:#1d2a44;--t1:#f4f7ff;--t2:#9da8c5;--t3:#697699;--blue:#6672ff;--teal:#13d5c3;--red:#ff4d66;--amber:#ffbe5c;--green:#34d399;--glow:0 4px 20px rgba(11,17,34,.7)}
 body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),transparent 28%),radial-gradient(circle at 85% 5%,rgba(19,213,195,.1),transparent 25%)}
+
+/* NAV */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:50px;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-.logo{font-size:19px;font-weight:700;background:linear-gradient(90deg,#6672ff,#13d5c3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logo{font-size:20px;font-weight:700;background:linear-gradient(90deg,#6672ff,#13d5c3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .logo-sub{font-size:11px;color:var(--t3);letter-spacing:2px}
 .tabs{display:flex;gap:3px;background:rgba(8,12,22,.8);border:1px solid var(--border);border-radius:999px;padding:3px}
-.tab{border:none;background:transparent;color:var(--t2);padding:6px 14px;border-radius:999px;cursor:pointer;font-size:13px;font-family:inherit;transition:all .15s;white-space:nowrap}
+.tab{border:none;background:transparent;color:var(--t2);padding:6px 16px;border-radius:999px;cursor:pointer;font-size:13px;font-family:inherit;transition:all .15s;white-space:nowrap}
 .tab:hover{color:var(--t1);background:rgba(102,114,255,.08)}
 .tab.on{background:rgba(102,114,255,.2);color:var(--t1)}
 .nr{display:flex;align-items:center;gap:8px}
 .clk,.onl{border:1px solid var(--border);background:var(--card2);border-radius:7px;padding:4px 11px;font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px}
 .gd{width:6px;height:6px;border-radius:50%;background:var(--green);animation:bk 2s infinite}
 @keyframes bk{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* META */
 .meta{display:flex;align-items:center;gap:14px;padding:4px 20px;background:rgba(11,16,28,.8);border-bottom:1px solid var(--border);font-size:10px;color:var(--t3)}
 .md{width:4px;height:4px;border-radius:50%;background:var(--blue)}
-.warn{margin:10px 14px 0;padding:7px 12px;border-radius:8px;background:rgba(255,190,92,.07);border:1px solid rgba(255,190,92,.2);font-size:11px;color:var(--amber);display:flex;align-items:center;gap:8px}
+
+/* WARNING */
+.warn{margin:10px 14px 0;padding:7px 12px;border-radius:8px;background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.18);font-size:11px;color:var(--green);display:flex;align-items:center;gap:8px}
 .warn b{color:var(--t2);font-weight:600;margin-right:3px}
+.warn.alert{background:rgba(255,190,92,.07);border-color:rgba(255,190,92,.2);color:var(--amber)}
+
+/* MAIN */
 .main{padding:10px 14px 20px}
 .sc{display:none}.sc.on{display:block}
-.sec-title{font-size:14px;color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.sec-title{font-size:14px;color:var(--t3);margin-bottom:10px;display:flex;align-items:center;gap:6px;letter-spacing:.3px}
 .sec-title::before{content:'';width:3px;height:12px;background:var(--blue);border-radius:2px}
+
+/* PANEL */
 .pnl{background:var(--panel);border:1px solid var(--border);border-radius:11px;box-shadow:var(--glow)}
-.ph{display:flex;align-items:center;justify-content:space-between;padding:12px 14px 0;font-size:15px;font-weight:600;color:var(--t2)}
+.ph{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 4px;font-size:15px;font-weight:700;color:var(--t2);letter-spacing:.2px}
 .ptag{font-size:10px;padding:2px 9px;border-radius:999px;background:rgba(102,114,255,.15);color:var(--blue)}
 .ptag.teal{background:rgba(19,213,195,.12);color:var(--teal)}
 .ptag.red{background:rgba(255,77,102,.12);color:var(--red)}
 .ptag.amber{background:rgba(255,190,92,.12);color:var(--amber)}
+.ptag.green{background:rgba(52,211,153,.12);color:var(--green)}
+
+/* GRIDS */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .g5{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .g31{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:10px}
+.g13{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-bottom:10px}
 .g321{display:grid;grid-template-columns:430px 1fr 260px;gap:10px;margin-bottom:10px}
 .g32{display:grid;grid-template-columns:290px 1fr 370px;gap:10px;margin-bottom:10px}
+
+/* KPI */
 .kpi{padding:12px 14px}
 .kpi .lb{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px;margin-bottom:4px}
 .kpi .lb::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
@@ -50,6 +67,8 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 .kpi .sb{font-size:11px;color:var(--t3);margin-top:2px}
 .up{color:var(--green)}.dn{color:var(--red)}.nu{color:var(--t3)}
 .cv{color:var(--teal)}.cb{color:var(--blue)}.cg{color:var(--green)}.ca{color:var(--amber)}.cr{color:var(--red)}
+
+/* PROJECT CARDS */
 .pj-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 10px}
 .pjc{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:10px 11px;border-left:3px solid}
 .pjc.ok{border-left-color:var(--green)}.pjc.wa{border-left-color:var(--amber)}.pjc.bd{border-left-color:var(--red)}
@@ -61,10 +80,14 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 .pb{height:3px;background:rgba(255,255,255,.05);border-radius:2px;margin:2px 0 5px;overflow:hidden}
 .pf{height:100%;border-radius:2px}.pf.bl{background:linear-gradient(90deg,#6672ff,#13d5c3)}.pf.gn{background:var(--green)}.pf.am{background:var(--amber)}.pf.rd{background:var(--red)}
 .syn{font-size:9px;margin-top:3px}.syn.ok{color:var(--green)}.syn.mm{color:var(--red)}
+
+/* PROGRESS ROWS */
 .pr{margin-bottom:8px}
 .pr-hd{display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:2px}
 .pv{font-weight:600}.pv.tl{color:var(--teal)}.pv.bl{color:var(--blue)}.pv.rd{color:var(--red)}.pv.am{color:var(--amber)}.pv.gn{color:var(--green)}
 .pt{height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
+
+/* TABLE */
 .dt{width:100%;border-collapse:collapse;font-size:13px}
 .dt th{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--t3);padding:7px 9px 5px;border-bottom:1px solid var(--border);text-align:left;font-weight:400}
 .dt td{padding:8px 10px;border-bottom:1px solid rgba(29,42,68,.35);color:var(--t2);vertical-align:middle}
@@ -73,324 +96,593 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 .dt td:first-child{color:var(--t1);font-weight:500}
 .pl{display:inline-block;font-size:9px;padding:2px 7px;border-radius:999px;font-weight:500}
 .pl.ok{background:rgba(52,211,153,.15);color:var(--green)}.pl.wa{background:rgba(255,190,92,.15);color:var(--amber)}.pl.bd{background:rgba(255,77,102,.15);color:var(--red)}.pl.bl{background:rgba(102,114,255,.18);color:var(--blue)}.pl.gy{background:rgba(105,118,153,.15);color:var(--t3)}
+.bt{display:inline-block;font-size:9px;padding:1px 5px;border-radius:999px}
+.b51{background:rgba(19,213,195,.12);color:var(--teal)}.bmd{background:rgba(102,114,255,.15);color:var(--blue)}.bhl{background:rgba(255,190,92,.12);color:var(--amber)}.bbdy{background:rgba(52,211,153,.1);color:var(--green)}
+
+/* ALERTS */
 .ai{display:flex;align-items:flex-start;gap:8px;padding:7px 11px;border-bottom:1px solid rgba(29,42,68,.35)}
 .ai:last-child{border:none}
 .ado{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:3px}
 .atx{font-size:12px;color:var(--t2);flex:1;line-height:1.5}
+.atm{font-size:9px;color:var(--t3);white-space:nowrap}
+
+/* TIMELINE */
 .tli{display:flex;gap:9px;padding-bottom:10px;position:relative}
 .tli:not(:last-child)::before{content:'';position:absolute;left:4px;top:11px;bottom:0;width:1px;background:var(--border)}
 .tld{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:1px;border:2px solid}
-.tlb{flex:1}.tlt{font-size:13px;font-weight:600;color:var(--t1)}.tls{font-size:11px;color:var(--t3);margin-top:1px}
-.ch{padding:6px 10px 8px}.ch canvas{max-height:200px}
-.ch-sm canvas{max-height:165px}.ch-r canvas{max-height:310px}.ch-l canvas{max-height:185px;min-height:150px}
+.tlb{flex:1}
+.tlt{font-size:13px;font-weight:600;color:var(--t1)}
+.tls{font-size:11px;color:var(--t3);margin-top:1px}
+
+/* SCORE RING */
+.score-wrap{display:flex;align-items:center;justify-content:center;padding:10px}
+.score-ring{position:relative;width:80px;height:80px}
+.score-ring svg{transform:rotate(-90deg)}
+.score-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}
+
+/* CHART */
+.ch{padding:6px 10px 8px;position:relative}
+.ch canvas{max-height:200px}
+.ch-sm canvas{max-height:165px}
+.ch-r canvas{max-height:310px}
+.ch-l canvas{max-height:185px;min-height:150px}
+
+/* HEATMAP */
 .hm{display:grid;grid-template-columns:auto repeat(5,1fr);gap:2px;padding:8px 10px;font-size:9px}
-.hm .hl{color:var(--t3);text-align:center;padding:2px;font-size:11px}.hm .hr{color:var(--t3);padding:4px 6px;font-size:11px}
-.hmc{border-radius:3px;height:28px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
+.hm .hl{color:var(--t3);text-align:center;padding:2px;font-size:11px}
+.hm .hr{color:var(--t3);padding:4px 6px;font-size:11px}
+.hmc{border-radius:3px;height:28px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+
+/* 2COL INFO */
+.inf{padding:8px 11px;display:flex;flex-direction:column;gap:6px}
+.inf-row{display:flex;align-items:center;justify-content:space-between;font-size:10px}
+.inf-row .l{color:var(--t2)}.inf-row .r{font-weight:600}
+
+/* FOOTER */
 .footer{text-align:center;padding:10px;font-size:9px;color:var(--t3);border-top:1px solid var(--border);margin-top:6px}
-</style></head><body>
+</style>
+</head>
+<body>
+
 <div class="nav">
-  <div><div class="logo">åçç» BI æ°å­åå¤§å±</div><div class="logo-sub">BRAND GROUP MANAGEMENT DASHBOARD V2.0</div></div>
+  <div>
+    <div class="logo">品牌组 BI 数字化大屏</div>
+    <div class="logo-sub">BRAND GROUP MANAGEMENT DASHBOARD V2.0</div>
+  </div>
   <div class="tabs">
-    <button class="tab on" onclick="sw('s0',this)">é¦é¡µæ»è§</button>
-    <button class="tab" onclick="sw('s1',this)">åçè¿è¥</button>
-    <button class="tab" onclick="sw('s2',this)">åçè®¾è®¡</button>
-    <button class="tab" onclick="sw('s3',this)">ååçæ¿</button>
-    <button class="tab" onclick="sw('s4',this)">å¨æå¤ç</button>
-    <button class="tab" onclick="sw('s5',this)">å²ä½ç®¡ç</button>
+    <button class="tab on" onclick="sw('s0',this)">首页总览</button>
+    <button class="tab" onclick="sw('s1',this)">品牌运营</button>
+    <button class="tab" onclick="sw('s2',this)">品牌设计</button>
+    <button class="tab" onclick="sw('s3',this)">协同看板</button>
+    <button class="tab" onclick="sw('s4',this)">周月复盘</button>
+    <button class="tab" onclick="sw('s5',this)">岗位管理</button>
   </div>
-  <div class="nr"><div class="clk" id="clk">ð --:--:--</div><div class="onl"><span class="gd"></span>SYSTEM ONLINE</div></div>
+  <div class="nr">
+    <div class="clk" id="clk">🕐 --:--:--</div>
+    <div class="onl"><span class="gd"></span>SYSTEM ONLINE</div>
+  </div>
 </div>
-<div class="meta"><span class="md"></span>æè¿å·æ°ï¼<span id="rt">2026-03-31</span><span class="md"></span>ç«åçæµï¼æ¯4å°æ¶<span class="md"></span>å½åï¼<span id="cm">é¦é¡µæ»è§</span></div>
-<div class="warn"><b>竞品预警 2026-04-01：</b>麻豆网上线「黑料泄密-热门吃瓜」专区，Pornhub推Premium 7天免费+Fanhub创作者生态上线，需重点关注。</div>
+
+<div class="meta">
+  <span class="md"></span>最近刷新：<span id="rt">2026-04-01 04:00:00</span>
+  <span class="md"></span>竞品监测：每 4 小时
+  <span class="md"></span>当前页面：<span id="cm">首页总览</span>
+  <span class="md"></span>本月数据截至：2026-03-31
+</div>
+
+<div class="warn"><b>竞品预警 2026-04-01：</b>麻豆网上线「黑料泄密-热门吃瓜」专区，Pornhub推 Premium 7天免费试用+Fanhub创作者生态，需重点关注。</div>
+
 <div class="main">
+
+<!-- ═══════════ S0: 首页总览 ═══════════ -->
 <div class="sc on" id="s0">
-<div class="sec-title">é¦é¡µæ»è§ Â· Executive Dashboard Â· ä»æ¥åçç»ç»¼åå¥åº·åº¦</div>
-<div class="g321" style="align-items:start">
-  <div class="pnl">
-    <div class="ph">5ç»´ç«åé·è¾¾çæ§ <span class="ptag">AIå®æ¶</span></div>
-    <div style="font-size:9px;color:var(--t3);padding:2px 13px 0">Pornhub / Miss AV / æµ·è§ç½ / éº»è± / ææ¹é¡¹ç®</div>
-    <div class="ch ch-r"><canvas id="radarChart"></canvas></div>
-  </div>
-  <div class="pnl">
-    <div class="ph">4å¤§æ ¸å¿é¡¹ç®çå½å¨æ <span class="ptag">å®æ¶</span></div>
-    <div class="pj-grid">
-      <div class="pjc ok"><div class="pjn">51åç</div><div class="pjv">Store_Image_v2.4</div>
-        <div class="row"><span class="st sok">å·²å®ç¨¿</span><span class="gd"></span></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">VIè¦çç</span><span style="font-size:11px;font-weight:600;color:var(--teal)">93%</span></div>
-        <div class="pb"><div class="pf bl" style="width:93%"></div></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">åçä¸ä¸åº¦</span><span style="font-size:11px;font-weight:600;color:var(--teal)">91å</span></div>
-        <div class="pb"><div class="pf bl" style="width:91%"></div></div>
-        <div class="syn ok">â ç«ç¹åæ­¥ææ°ç</div></div>
-      <div class="pjc wa"><div class="pjn">æ¯æ¥å¤§èµ</div><div class="pjv">Logo_Pack_v1.9</div>
-        <div class="row"><span class="st swa">å¾ä¼å</span><span style="width:7px;height:7px;border-radius:50%;background:var(--amber)"></span></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">VIè¦çç</span><span style="font-size:11px;font-weight:600;color:var(--amber)">86%</span></div>
-        <div class="pb"><div class="pf am" style="width:86%"></div></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">ç­ç¥æ§è¡åå·®</span><span style="font-size:11px;font-weight:600;color:var(--amber)">-12%</span></div>
-        <div class="pb"><div class="pf am" style="width:88%"></div></div>
-        <div class="syn ok">â ç«ç¹åæ­¥ææ°ç</div></div>
-      <div class="pjc bd"><div class="pjn">é»æç½</div><div class="pjv">Visual_Kit_v1.6</div>
-        <div class="row"><span class="st sbd">å¾ä¼å</span><span style="width:7px;height:7px;border-radius:50%;background:var(--red)"></span></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">VIè¦çç</span><span style="font-size:11px;font-weight:600;color:var(--red)">79%</span></div>
-        <div class="pb"><div class="pf rd" style="width:79%"></div></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">åçä¸ä¸åº¦</span><span style="font-size:11px;font-weight:600;color:var(--red)">72å</span></div>
-        <div class="pb"><div class="pf rd" style="width:72%"></div></div>
-        <div class="syn mm">â  åç°çæ¬ä¸ä¸è´</div></div>
-      <div class="pjc ok"><div class="pjn">é»æä¸æç</div><div class="pjv">Brand_System_v2.1</div>
-        <div class="row"><span class="st sok">å·²å®ç¨¿</span><span class="gd"></span></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">VIè¦çç</span><span style="font-size:11px;font-weight:600;color:var(--green)">95%</span></div>
-        <div class="pb"><div class="pf gn" style="width:95%"></div></div>
-        <div class="row"><span style="font-size:9px;color:var(--t3)">ç­ç¥æ§è¡åå·®</span><span style="font-size:11px;font-weight:600;color:var(--green)">+5%</span></div>
-        <div class="pb"><div class="pf gn" style="width:89%"></div></div>
-        <div class="syn ok">â ç«ç¹åæ­¥ææ°ç</div></div>
+  <div class="sec-title">首页总览 · Executive Dashboard · 今日品牌组综合健康度</div>
+
+  <!-- ROW 1: 雷达 | 项目看板 | KPI -->
+  <div class="g321" style="align-items:start">
+
+    <!-- 竞品雷达 -->
+    <div class="pnl">
+      <div class="ph">5 维竞品雷达监控 <span class="ptag">AI 实时</span></div>
+      <div style="font-size:9px;color:var(--t3);padding:2px 13px 0">对比 Pornhub 95% · 麻豆 80% · 海角 65% · MissAV 40% · 我方 85% ｜ 2026-04-01</div>
+      <div class="ch ch-r"><canvas id="radarChart"></canvas></div>
+    </div>
+
+    <!-- 4大项目 -->
+    <div class="pnl">
+      <div class="ph">4 大核心项目生命周期 <span class="ptag">实时</span></div>
+      <div class="pj-grid">
+        <div class="pjc ok">
+          <div class="pjn">51吃瓜</div>
+          <div class="pjv">版本：Store_Image_v2.4</div>
+          <div class="row"><span class="st sok">已定稿</span><span class="gd"></span></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">VI 覆盖率</span><span style="font-size:11px;font-weight:600;color:var(--teal)">93%</span></div>
+          <div class="pb"><div class="pf bl" style="width:93%"></div></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">品牌专业度</span><span style="font-size:11px;font-weight:600;color:var(--teal)">91分</span></div>
+          <div class="pb"><div class="pf bl" style="width:91%"></div></div>
+          <div class="syn ok">✓ 站点同步最新版</div>
+        </div>
+        <div class="pjc wa">
+          <div class="pjn">每日大赛</div>
+          <div class="pjv">版本：Logo_Pack_v1.9</div>
+          <div class="row"><span class="st swa">待优化</span><span style="width:7px;height:7px;border-radius:50%;background:var(--amber)"></span></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">VI 覆盖率</span><span style="font-size:11px;font-weight:600;color:var(--amber)">86%</span></div>
+          <div class="pb"><div class="pf am" style="width:86%"></div></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">策略执行偏差</span><span style="font-size:11px;font-weight:600;color:var(--amber)">-12%</span></div>
+          <div class="pb"><div class="pf am" style="width:88%"></div></div>
+          <div class="syn ok">✓ 站点同步最新版</div>
+        </div>
+        <div class="pjc bd">
+          <div class="pjn">黑料网</div>
+          <div class="pjv">版本：Visual_Kit_v1.6</div>
+          <div class="row"><span class="st sbd">待优化</span><span style="width:7px;height:7px;border-radius:50%;background:var(--red)"></span></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">VI 覆盖率</span><span style="font-size:11px;font-weight:600;color:var(--red)">79%</span></div>
+          <div class="pb"><div class="pf rd" style="width:79%"></div></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">品牌专业度</span><span style="font-size:11px;font-weight:600;color:var(--red)">72分</span></div>
+          <div class="pb"><div class="pf rd" style="width:72%"></div></div>
+          <div class="syn mm">⚠ 发现版本不一致</div>
+        </div>
+        <div class="pjc ok">
+          <div class="pjn">黑料不打烊</div>
+          <div class="pjv">版本：Brand_System_v2.1</div>
+          <div class="row"><span class="st sok">已定稿</span><span class="gd"></span></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">VI 覆盖率</span><span style="font-size:11px;font-weight:600;color:var(--green)">95%</span></div>
+          <div class="pb"><div class="pf gn" style="width:95%"></div></div>
+          <div class="row"><span style="font-size:9px;color:var(--t3)">策略执行偏差</span><span style="font-size:11px;font-weight:600;color:var(--green)">+5%</span></div>
+          <div class="pb"><div class="pf gn" style="width:89%"></div></div>
+          <div class="syn ok">✓ 站点同步最新版</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="pnl kpi"><div class="lb">黑料不打烊 PV</div><div class="vl cv">740,634</div><div class="dl up">↑ +4.2% 较上月</div><div class="sb">目标 1000万 / 实际 920万</div></div>
+      <div class="pnl kpi"><div class="lb">设计需求准时交付率</div><div class="vl ca">87%</div><div class="dl dn">↓ 差目标 3%</div><div class="sb">目标 90% / 44件中38件</div></div>
+      <div class="pnl kpi"><div class="lb">黑料网 PV</div><div class="vl cb">360,130<span style="font-size:14px">件</span></div><div class="dl nu">延期 3 · 正常 10</div></div>
+      <div class="pnl kpi"><div class="lb">51吃瓜 PV</div><div class="vl cr">355,284<span style="font-size:14px">项</span></div><div class="dl dn">高风险 1 / 中风险 1</div></div>
     </div>
   </div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="pnl kpi"><div class="lb">åçæåè¾¾æç</div><div class="vl cv">92%</div><div class="dl up">â +4.2% è¾ä¸æ</div><div class="sb">ç®æ 1000ä¸/å®é920ä¸</div></div>
-    <div class="pnl kpi"><div class="lb">è®¾è®¡åæ¶äº¤ä»ç</div><div class="vl ca">87%</div><div class="dl dn">â å·®ç®æ 3%</div></div>
-    <div class="pnl kpi"><div class="lb">è¿è¡ä¸­é¡¹ç®</div><div class="vl cb">13<span style="font-size:14px">ä»¶</span></div><div class="dl nu">å»¶æ3Â·æ­£å¸¸10</div></div>
-    <div class="pnl kpi"><div class="lb">æ¬å¨é£é©é¢è­¦</div><div class="vl cr">2<span style="font-size:14px">é¡¹</span></div><div class="dl dn">é«é£é©1/ä¸­é£é©1</div></div>
+
+  <!-- ROW 2 -->
+  <div class="g32">
+    <!-- 环形 -->
+    <div class="pnl">
+      <div class="ph">需求类型占比 <span class="ptag">本月</span></div>
+      <div class="ch ch-sm"><canvas id="donutChart"></canvas></div>
+    </div>
+    <!-- 趋势折线 -->
+    <div class="pnl">
+      <div class="ph">品牌曝光 & 互动趋势（周维度）<span class="ptag teal">实时</span></div>
+      <div class="ch ch-l"><canvas id="lineChart0"></canvas></div>
+    </div>
+    <!-- 岗位评分 -->
+    <div class="pnl">
+      <div class="ph">岗位效率对比 <span class="ptag amber">本月</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px">
+        <div style="text-align:center">
+          <div style="font-size:10px;color:var(--t2);margin-bottom:4px">品牌运营</div>
+          <canvas id="gauge0" width="90" height="90"></canvas>
+          <div style="font-size:18px;font-weight:700;color:var(--teal);margin-top:-60px;position:relative;z-index:1">92</div>
+          <div style="font-size:9px;color:var(--t3);margin-top:48px">综合得分</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:10px;color:var(--t2);margin-bottom:4px">品牌设计</div>
+          <canvas id="gauge1" width="90" height="90"></canvas>
+          <div style="font-size:18px;font-weight:700;color:var(--blue);margin-top:-60px;position:relative;z-index:1">88</div>
+          <div style="font-size:9px;color:var(--t3);margin-top:48px">综合得分</div>
+        </div>
+      </div>
+      <div style="padding:0 10px 8px">
+        <div class="pr"><div class="pr-hd"><span>结果达成</span><span class="pv tl">96%</span></div><div class="pt"><div class="pf bl" style="width:96%"></div></div></div>
+        <div class="pr"><div class="pr-hd"><span>执行效率</span><span class="pv bl">88%</span></div><div class="pt"><div class="pf bl" style="width:88%"></div></div></div>
+        <div class="pr"><div class="pr-hd"><span>协同质量</span><span class="pv am">82%</span></div><div class="pt"><div class="pf am" style="width:82%"></div></div></div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="g32">
-  <div class="pnl"><div class="ph">éæ±ç±»åå æ¯ <span class="ptag">æ¬æ</span></div><div class="ch ch-sm"><canvas id="donutChart"></canvas></div></div>
-  <div class="pnl"><div class="ph">åçæå&amp;äºå¨è¶å¿ï¼å¨ç»´åº¦ï¼<span class="ptag teal">å®æ¶</span></div><div class="ch ch-l"><canvas id="lineChart0"></canvas></div></div>
-  <div class="pnl">
-    <div class="ph">å²ä½æçå¯¹æ¯ <span class="ptag amber">æ¬æ</span></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px">
-      <div style="text-align:center"><div style="font-size:10px;color:var(--t2);margin-bottom:4px">åçè¿è¥</div><div style="font-size:36px;font-weight:700;color:var(--teal);padding:8px 0">92</div><div style="font-size:9px;color:var(--t3)">ç»¼åå¾å</div></div>
-      <div style="text-align:center"><div style="font-size:10px;color:var(--t2);margin-bottom:4px">åçè®¾è®¡</div><div style="font-size:36px;font-weight:700;color:var(--blue);padding:8px 0">88</div><div style="font-size:9px;color:var(--t3)">ç»¼åå¾å</div></div>
-    </div>
-    <div style="padding:0 10px 8px">
-      <div class="pr"><div class="pr-hd"><span>ç»æè¾¾æ</span><span class="pv tl">96%</span></div><div class="pt"><div class="pf bl" style="width:96%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>æ§è¡æç</span><span class="pv bl">88%</span></div><div class="pt"><div class="pf bl" style="width:88%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>ååè´¨é</span><span class="pv am">82%</span></div><div class="pt"><div class="pf am" style="width:82%"></div></div></div>
-    </div>
-  </div>
-</div>
-</div>
+
+<!-- ═══════════ S1: 品牌运营 ═══════════ -->
 <div class="sc" id="s1">
-<div class="sec-title">åçè¿è¥çæ¿ Â· Brand Operations Â· èå¨ http://76.13.214.108:8501/</div>
-<div class="g4" style="margin-bottom:10px">
-  <div class="pnl kpi"><div class="lb">æåº¦æåè¾¾æ</div><div class="vl cv">92%</div><div class="dl up">â +4.2% ç®æ 1000ä¸</div></div>
-  <div class="pnl kpi"><div class="lb">äºå¨éè¾¾æç</div><div class="vl cg">115%</div><div class="dl up">â è¶é¢å®æ</div><div class="sb">ç®æ 20ä¸/å®é23ä¸</div></div>
-  <div class="pnl kpi"><div class="lb">åå®¹åå¸é</div><div class="vl cb">84<span style="font-size:13px">æ¡</span></div><div class="dl up">â +14è¾ä¸å¨</div></div>
-  <div class="pnl kpi"><div class="lb">æ¸ éå¹³åè½¬åç</div><div class="vl ca">3.2%</div><div class="dl dn">â ç®æ 4.0%</div></div>
-</div>
-<div class="g31">
-  <div class="pnl"><div class="ph">ç®æ vså®éè¾¾æè¶å¿</div><div class="ch"><canvas id="barChart1"></canvas></div></div>
-  <div class="pnl">
-    <div class="ph">è¡¨ç°è¯æ­ <span class="ptag red">é¢è­¦</span></div>
-    <div class="ai"><div class="ado" style="background:var(--red)"></div><div class="atx"><b style="color:var(--red)">è½¬åçä¸æ»ï¼</b>æ¸ éç­ç¥ä¸åå®¹èå¥ä¸å¹éï¼å»ºè®®è°æ´ææ¾é¢æ¬¡</div></div>
-    <div class="ai"><div class="ado" style="background:var(--amber)"></div><div class="atx"><b style="color:var(--amber)">ç­è§é¢å¾ä¼åï¼</b>é»æç½ç­è§é¢å®æ­çä»42%ï¼ä½äºè¡ä¸åå¼</div></div>
-    <div class="ai"><div class="ado" style="background:var(--green)"></div><div class="atx"><b style="color:var(--green)">å¾æè¡¨ç°ä¼å¼ï¼</b>51åçå¾æäºå¨ç8.3%ï¼é«äºåºçº¿2.1å</div></div>
-    <div style="padding:8px 11px"><div style="font-size:9px;color:var(--t3);margin-bottom:4px">ä¸å¨æå¨ä½å»ºè®®</div>
-      <div style="font-size:10px;color:var(--t2);line-height:1.7;background:var(--card);border-radius:6px;padding:7px 9px">â  å å¤§51åçå¾æææ¾å æ¯+20%<br>â¡ é»æç½ç­è§é¢æ¶é¿åç¼©è³30sä»¥å<br>â¢ æ¯æ¥å¤§èµè¡¥åäºå¨è¯é¢å¼å¯¼</div></div>
+  <div class="sec-title">品牌运营看板 · Brand Operations · 联动 http://76.13.214.108:8501/</div>
+
+  <!-- A. 目标与结果 -->
+  <div class="g4" style="margin-bottom:10px">
+    <div class="pnl kpi"><div class="lb">月度曝光目标达成</div><div class="vl cv">92%</div><div class="dl up">↑ +4.2% 目标 1000万</div></div>
+    <div class="pnl kpi"><div class="lb">互动量达成率</div><div class="vl cg">115%</div><div class="dl up">↑ 超额完成！</div><div class="sb">目标20万/实际23万</div></div>
+    <div class="pnl kpi"><div class="lb">内容发布量</div><div class="vl cb">84<span style="font-size:13px">条</span></div><div class="dl up">↑ +14 较上周</div></div>
+    <div class="pnl kpi"><div class="lb">渠道平均转化率</div><div class="vl ca">3.2%</div><div class="dl dn">↓ 目标 4.0%</div></div>
+  </div>
+
+  <div class="g31">
+    <!-- 趋势图 -->
+    <div class="pnl">
+      <div class="ph">目标 vs 实际达成趋势（周维度）</div>
+      <div class="ch"><canvas id="barChart1"></canvas></div>
+    </div>
+    <!-- 诊断 -->
+    <div class="pnl">
+      <div class="ph">表现诊断 <span class="ptag red">预警</span></div>
+      <div class="ai"><div class="ado" style="background:var(--red)"></div><div class="atx"><b style="color:var(--red)">⚠ 竞品活动预警：</b>麻豆网上线「黑料泄密-热门吃瓜」专区，直接抢占核心用户，建议立即跟进差异化内容策略</div></div>
+    <div class="ai"><div class="ado" style="background:var(--amber)"></div><div class="atx"><b style="color:var(--amber)">Pornhub 视觉建议：</b>视觉/互动/内容/产品四维均达100%，Premium+Fanhub生态升级，建议对标优化我方UI设计体验</div></div>
+    <div class="ai"><div class="ado" style="background:var(--blue)"></div><div class="atx"><b style="color:var(--blue)">海角借势营销：</b>蹭抖音网红「一只香下海」热度，内容互动80%，建议我方同步布局 KOL 合作流量</div></div>
+      <div style="padding:8px 11px">
+        <div style="font-size:9px;color:var(--t3);margin-bottom:4px">下周期动作建议</div>
+        <div style="font-size:10px;color:var(--t2);line-height:1.7;background:var(--card);border-radius:6px;padding:7px 9px">① 加大51吃瓜图文投放占比 +20%<br>② 黑料网短视频时长压缩至 30s 以内<br>③ 每日大赛补充互动话题引导</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B. 渠道表现 -->
+  <div class="g2">
+    <div class="pnl">
+      <div class="ph">渠道表现明细</div>
+      <table class="dt" style="margin:4px 0">
+        <thead><tr><th>渠道</th><th>发布数</th><th>曝光</th><th>互动率</th><th>转化率</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td>Telegram</td><td>28</td><td>320万</td><td style="color:var(--green)">8.3%</td><td>4.2%</td><td><span class="pl ok">优秀</span></td></tr>
+          <tr><td>Twitter/X</td><td>21</td><td>180万</td><td style="color:var(--teal)">5.1%</td><td>3.8%</td><td><span class="pl ok">良好</span></td></tr>
+          <tr><td>短视频平台</td><td>18</td><td>280万</td><td style="color:var(--amber)">3.2%</td><td>2.1%</td><td><span class="pl wa">待优化</span></td></tr>
+          <tr><td>站内推送</td><td>17</td><td>140万</td><td style="color:var(--red)">2.8%</td><td>1.9%</td><td><span class="pl bd">风险</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pnl">
+      <div class="ph">内容类型表现</div>
+      <div class="ch ch-sm"><canvas id="barChart1b"></canvas></div>
+    </div>
   </div>
 </div>
-<div class="g2">
-  <div class="pnl"><div class="ph">æ¸ éè¡¨ç°æç»</div>
-    <table class="dt" style="margin:4px 0"><thead><tr><th>æ¸ é</th><th>åå¸æ°</th><th>æå</th><th>äºå¨ç</th><th>è½¬åç</th><th>ç¶æ</th></tr></thead>
-    <tbody>
-      <tr><td>Telegram</td><td>28</td><td>320ä¸</td><td style="color:var(--green)">8.3%</td><td>4.2%</td><td><span class="pl ok">ä¼ç§</span></td></tr>
-      <tr><td>Twitter/X</td><td>21</td><td>180ä¸</td><td style="color:var(--teal)">5.1%</td><td>3.8%</td><td><span class="pl ok">è¯å¥½</span></td></tr>
-      <tr><td>ç­è§é¢å¹³å°</td><td>18</td><td>280ä¸</td><td style="color:var(--amber)">3.2%</td><td>2.1%</td><td><span class="pl wa">å¾ä¼å</span></td></tr>
-      <tr><td>ç«åæ¨é</td><td>17</td><td>140ä¸</td><td style="color:var(--red)">2.8%</td><td>1.9%</td><td><span class="pl bd">é£é©</span></td></tr>
-    </tbody></table></div>
-  <div class="pnl"><div class="ph">åå®¹ç±»åè¡¨ç°</div><div class="ch ch-sm"><canvas id="barChart1b"></canvas></div></div>
-</div>
-</div>
+
+<!-- ═══════════ S2: 品牌设计 ═══════════ -->
 <div class="sc" id="s2">
-<div class="sec-title">åçè®¾è®¡çæ¿ Â· Brand Design Â· è®¾è®¡å²ä½æçä¸è´¨é</div>
-<div class="g5">
-  <div class="pnl kpi"><div class="lb">æ¬ææ°éæ±</div><div class="vl cb">47<span style="font-size:13px">ä»¶</span></div><div class="dl up">â +12è¾ä¸æ</div></div>
-  <div class="pnl kpi"><div class="lb">åæ¶äº¤ä»çOTD</div><div class="vl cv">87%</div><div class="dl dn">ç®æ 90%</div></div>
-  <div class="pnl kpi"><div class="lb">å¹³åäº¤ä»å¨æTAT</div><div class="vl cg">3.2<span style="font-size:13px">å¤©</span></div><div class="dl up">â-0.5å¤©</div></div>
-  <div class="pnl kpi"><div class="lb">è¿å·¥ç</div><div class="vl cr">25%</div><div class="dl dn">âç®æ â¤15%</div></div>
-  <div class="pnl kpi"><div class="lb">ä¸æ¬¡è¿ç¨¿ç</div><div class="vl ca">75%</div><div class="dl dn">âç®æ 85%</div></div>
-</div>
-<div class="g321" style="align-items:start">
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="pnl"><div class="ph">éæ±æ¥æºå æ¯</div><div style="padding:8px 11px">
-      <div class="pr"><div class="pr-hd"><span>ä¹ä¹</span><span class="pv tl">32%</span></div><div class="pt"><div class="pf bl" style="width:32%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>éç°</span><span class="pv bl">28%</span></div><div class="pt"><div class="pf bl" style="width:28%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>é£ç¾½</span><span class="pv am">22%</span></div><div class="pt"><div class="pf am" style="width:22%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>é¾å²</span><span class="pv gn">18%</span></div><div class="pt"><div class="pf gn" style="width:18%"></div></div></div>
-    </div></div>
-    <div class="pnl"><div class="ph">åç±»ç©æå¹³åèæ¶</div><div style="padding:8px 11px">
-      <div class="pr"><div class="pr-hd"><span>æ´»å¨ä¸»è§è§</span><span class="pv rd">4.2å¤©</span></div><div class="pt"><div class="pf rd" style="width:84%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>IPå½¢è±¡è®¾è®¡</span><span class="pv am">3.8å¤©</span></div><div class="pt"><div class="pf am" style="width:76%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>VIç©æå¥è£</span><span class="pv bl">3.2å¤©</span></div><div class="pt"><div class="pf bl" style="width:64%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>ç¤¾åªå¾</span><span class="pv tl">1.5å¤©</span></div><div class="pt"><div class="pf gn" style="width:30%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>è§é¢å°é¢</span><span class="pv gn">0.8å¤©</span></div><div class="pt"><div class="pf gn" style="width:16%"></div></div></div>
-    </div></div>
+  <div class="sec-title">品牌设计看板 · Brand Design · 设计岗位效率与质量</div>
+
+  <!-- A. 需求池 -->
+  <div class="g5">
+    <div class="pnl kpi"><div class="lb">本月新需求</div><div class="vl cb">47<span style="font-size:13px">件</span></div><div class="dl up">↑ +12 较上月</div></div>
+    <div class="pnl kpi"><div class="lb">准时交付率 OTD</div><div class="vl cv">87%</div><div class="dl dn">目标 90%</div></div>
+    <div class="pnl kpi"><div class="lb">平均交付周期 TAT</div><div class="vl cg">3.2<span style="font-size:13px">天</span></div><div class="dl up">↓ -0.5天</div></div>
+    <div class="pnl kpi"><div class="lb">返工率</div><div class="vl cr">25%</div><div class="dl dn">↑ 目标 ≤15%</div></div>
+    <div class="pnl kpi"><div class="lb">一次过稿率</div><div class="vl ca">75%</div><div class="dl dn">↓ 目标 85%</div></div>
   </div>
-  <div class="pnl"><div class="ph">äº¤ä»æçè¶å¿TAT</div><div class="ch ch-l"><canvas id="lineChart2"></canvas></div></div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="pnl"><div class="ph">åçè§èåè§ç</div><div style="padding:8px 11px">
-      <div class="pr"><div class="pr-hd"><span>å­ä½è§è</span><span class="pv gn">96%</span></div><div class="pt"><div class="pf gn" style="width:96%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>è²å½©è§è</span><span class="pv tl">91%</span></div><div class="pt"><div class="pf bl" style="width:91%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>LOGOä½¿ç¨</span><span class="pv am">84%</span></div><div class="pt"><div class="pf am" style="width:84%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>è§è§å±çº§</span><span class="pv rd">76%</span></div><div class="pt"><div class="pf rd" style="width:76%"></div></div></div>
-    </div></div>
-    <div class="pnl"><div class="ph">é©³ååå TOP5 <span class="ptag red">éç¹</span></div><div style="padding:8px 11px">
-      <div class="pr"><div class="pr-hd"><span>éæ±æè¿°ä¸æ¸</span><span class="pv rd">8æ¬¡</span></div><div class="pt"><div class="pf rd" style="width:80%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>è§è§å±çº§æ··ä¹±</span><span class="pv am">5æ¬¡</span></div><div class="pt"><div class="pf am" style="width:50%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>åçè²ä¸è§è</span><span class="pv am">4æ¬¡</span></div><div class="pt"><div class="pf am" style="width:40%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>å°ºå¯¸ä¸ç¬¦</span><span class="pv bl">3æ¬¡</span></div><div class="pt"><div class="pf bl" style="width:30%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>ææ¡éè¯¯</span><span class="pv tl">2æ¬¡</span></div><div class="pt"><div class="pf gn" style="width:20%"></div></div></div>
-    </div></div>
+
+  <div class="g321" style="align-items:start">
+    <!-- 需求来源 + 类型 -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="pnl">
+        <div class="ph">需求来源占比</div>
+        <div style="padding:8px 11px">
+          <div class="pr"><div class="pr-hd"><span>乔乔</span><span class="pv tl">32%</span></div><div class="pt"><div class="pf bl" style="width:32%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>青灰</span><span class="pv bl">28%</span></div><div class="pt"><div class="pf bl" style="width:28%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>飞羽</span><span class="pv am">22%</span></div><div class="pt"><div class="pf am" style="width:22%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>雾岚</span><span class="pv gn">18%</span></div><div class="pt"><div class="pf gn" style="width:18%"></div></div></div>
+        </div>
+      </div>
+      <div class="pnl">
+        <div class="ph">各类物料平均耗时</div>
+        <div style="padding:8px 11px">
+          <div class="pr"><div class="pr-hd"><span>活动主视觉</span><span class="pv rd">4.2天</span></div><div class="pt"><div class="pf rd" style="width:84%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>IP形象设计</span><span class="pv am">3.8天</span></div><div class="pt"><div class="pf am" style="width:76%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>VI 物料套装</span><span class="pv bl">3.2天</span></div><div class="pt"><div class="pf bl" style="width:64%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>社媒图</span><span class="pv tl">1.5天</span></div><div class="pt"><div class="pf gn" style="width:30%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>视频封面</span><span class="pv gn">0.8天</span></div><div class="pt"><div class="pf gn" style="width:16%"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 交付效率折线 + 质量 -->
+    <div class="pnl">
+      <div class="ph">交付效率趋势 TAT（周维度）</div>
+      <div class="ch ch-l"><canvas id="lineChart2"></canvas></div>
+    </div>
+
+    <!-- C. 质量 -->
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="pnl">
+        <div class="ph">品牌规范合规率</div>
+        <div style="padding:8px 11px">
+          <div class="pr"><div class="pr-hd"><span>字体规范</span><span class="pv gn">96%</span></div><div class="pt"><div class="pf gn" style="width:96%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>色彩规范</span><span class="pv tl">91%</span></div><div class="pt"><div class="pf bl" style="width:91%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>LOGO 使用</span><span class="pv am">84%</span></div><div class="pt"><div class="pf am" style="width:84%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>视觉层级</span><span class="pv rd">76%</span></div><div class="pt"><div class="pf rd" style="width:76%"></div></div></div>
+        </div>
+      </div>
+      <div class="pnl">
+        <div class="ph">驳回原因 TOP5 <span class="ptag red">重点</span></div>
+        <div style="padding:8px 11px">
+          <div class="pr"><div class="pr-hd"><span>需求描述不清</span><span class="pv rd">8次</span></div><div class="pt"><div class="pf rd" style="width:80%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>视觉层级混乱</span><span class="pv am">5次</span></div><div class="pt"><div class="pf am" style="width:50%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>品牌色不规范</span><span class="pv am">4次</span></div><div class="pt"><div class="pf am" style="width:40%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>尺寸不符</span><span class="pv bl">3次</span></div><div class="pt"><div class="pf bl" style="width:30%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>文案错误</span><span class="pv tl">2次</span></div><div class="pt"><div class="pf gn" style="width:20%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D. 产能负载 -->
+  <div class="pnl">
+    <div class="ph">产能负载热力图 · 设计师在制任务数 <span class="ptag amber">实时</span></div>
+    <div class="hm">
+      <div class="hl"></div>
+      <div class="hl">周一</div><div class="hl">周二</div><div class="hl">周三</div><div class="hl">周四</div><div class="hl">周五</div>
+      <div class="hr">乔乔</div>
+      <div class="hmc" style="background:rgba(255,77,102,.5);color:#fff">8</div>
+      <div class="hmc" style="background:rgba(255,77,102,.4);color:#fff">7</div>
+      <div class="hmc" style="background:rgba(255,190,92,.4);color:#111">5</div>
+      <div class="hmc" style="background:rgba(255,77,102,.45);color:#fff">6</div>
+      <div class="hmc" style="background:rgba(255,77,102,.3);color:#fff">5</div>
+      <div class="hr">青灰</div>
+      <div class="hmc" style="background:rgba(255,190,92,.3);color:#111">4</div>
+      <div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div>
+      <div class="hmc" style="background:rgba(255,190,92,.35);color:#111">4</div>
+      <div class="hmc" style="background:rgba(52,211,153,.3);color:#fff">3</div>
+      <div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div>
+      <div class="hr">飞羽</div>
+      <div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div>
+      <div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div>
+      <div class="hmc" style="background:rgba(255,190,92,.3);color:#111">4</div>
+      <div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div>
+      <div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div>
+      <div class="hr">雾岚</div>
+      <div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div>
+      <div class="hmc" style="background:rgba(255,190,92,.35);color:#111">4</div>
+      <div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div>
+      <div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div>
+      <div class="hmc" style="background:rgba(52,211,153,.15);color:#fff">1</div>
+    </div>
+    <div style="display:flex;gap:12px;padding:0 10px 8px;font-size:9px;color:var(--t3)">
+      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(255,77,102,.5);border-radius:2px;margin-right:3px"></span>过载 ≥6</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(255,190,92,.4);border-radius:2px;margin-right:3px"></span>紧张 4-5</span>
+      <span><span style="display:inline-block;width:8px;height:8px;background:rgba(52,211,153,.3);border-radius:2px;margin-right:3px"></span>正常 ≤3</span>
+    </div>
   </div>
 </div>
-<div class="pnl"><div class="ph">äº§è½è´è½½ç­åå¾ <span class="ptag amber">å®æ¶</span></div>
-  <div class="hm">
-    <div class="hl"></div><div class="hl">å¨ä¸</div><div class="hl">å¨äº</div><div class="hl">å¨ä¸</div><div class="hl">å¨å</div><div class="hl">å¨äº</div>
-    <div class="hr">ä¹ä¹</div><div class="hmc" style="background:rgba(255,77,102,.5);color:#fff">8</div><div class="hmc" style="background:rgba(255,77,102,.4);color:#fff">7</div><div class="hmc" style="background:rgba(255,190,92,.4);color:#111">5</div><div class="hmc" style="background:rgba(255,77,102,.45);color:#fff">6</div><div class="hmc" style="background:rgba(255,77,102,.3);color:#fff">5</div>
-    <div class="hr">éç°</div><div class="hmc" style="background:rgba(255,190,92,.3);color:#111">4</div><div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div><div class="hmc" style="background:rgba(255,190,92,.35);color:#111">4</div><div class="hmc" style="background:rgba(52,211,153,.3);color:#fff">3</div><div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div>
-    <div class="hr">é£ç¾½</div><div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div><div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div><div class="hmc" style="background:rgba(255,190,92,.3);color:#111">4</div><div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div><div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div>
-    <div class="hr">é¾å²</div><div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div><div class="hmc" style="background:rgba(255,190,92,.35);color:#111">4</div><div class="hmc" style="background:rgba(52,211,153,.25);color:#fff">3</div><div class="hmc" style="background:rgba(52,211,153,.2);color:#fff">2</div><div class="hmc" style="background:rgba(52,211,153,.15);color:#fff">1</div>
-  </div>
-  <div style="display:flex;gap:12px;padding:0 10px 8px;font-size:9px;color:var(--t3)">
-    <span><span style="display:inline-block;width:8px;height:8px;background:rgba(255,77,102,.5);border-radius:2px;margin-right:3px"></span>è¿è½½â¥6</span>
-    <span><span style="display:inline-block;width:8px;height:8px;background:rgba(255,190,92,.4);border-radius:2px;margin-right:3px"></span>ç´§å¼ 4-5</span>
-    <span><span style="display:inline-block;width:8px;height:8px;background:rgba(52,211,153,.3);border-radius:2px;margin-right:3px"></span>æ­£å¸¸â¤3</span>
-  </div>
-</div>
-</div>
+
+<!-- ═══════════ S3: 协同看板 ═══════════ -->
 <div class="sc" id="s3">
-<div class="sec-title">ååçæ¿ Â· OpsÃDesign Â· æå³é®çç®¡çé¡µï¼ä¸é¨è§£å³å¡ç¹</div>
-<div class="g5">
-  <div class="pnl kpi"><div class="lb">éæ±ä¸æ¬¡åæ ¼ç</div><div class="vl cb">82%</div><div class="dl nu">è¿è¥æéè´¨é</div></div>
-  <div class="pnl kpi"><div class="lb">å¹³åè¡¥åæ¬¡æ°</div><div class="vl cv">1.3<span style="font-size:13px">æ¬¡</span></div><div class="dl up">ç®æ â¤1.5</div></div>
-  <div class="pnl kpi"><div class="lb">å¹³åè¯å®¡è½®æ¬¡</div><div class="vl ca">2.1<span style="font-size:13px">è½®</span></div><div class="dl dn">âéä¼å</div></div>
-  <div class="pnl kpi"><div class="lb">ç«é¡¹âä¸çº¿Lead Time</div><div class="vl cg">5.5<span style="font-size:13px">å¤©</span></div><div class="dl up">ç®æ â¤7å¤©</div></div>
-  <div class="pnl kpi"><div class="lb">æ¬å¨å»¶æé¡¹ç®æ°</div><div class="vl cr">3<span style="font-size:13px">ä»¶</span></div><div class="dl dn">âè¾ä¸å¨+1</div></div>
-</div>
-<div class="g31">
-  <div class="pnl"><div class="ph">åé¶æ®µèæ¶æè§£ï¼å¤©ï¼</div><div class="ch"><canvas id="barChart3"></canvas></div></div>
-  <div style="display:flex;flex-direction:column;gap:10px">
-    <div class="pnl"><div class="ph">æ¬å¨ååç¶é¢ <span class="ptag red">èªå¨æ çº¢</span></div>
-      <div class="ai"><div class="ado" style="background:var(--red)"></div><div class="atx"><b style="color:var(--red)">é«é£é©ï¼</b>éæ±æè¿°ä¸æ¸å¯¼è´è¿å·¥ï¼æ¬å¨3é¡¹å»¶æåå¼1.5å¤©</div></div>
-      <div class="ai"><div class="ado" style="background:var(--amber)"></div><div class="atx"><b style="color:var(--amber)">ä¸­é£é©ï¼</b>è®¾è®¡äº§è½ä¸è¶³ï¼æ°åªä½ç´ æç§¯å2å¤©</div></div>
-      <div class="ai"><div class="ado" style="background:var(--green)"></div><div class="atx"><b style="color:var(--green)">æ­£å¸¸ï¼</b>åæ æ³¨åæµç¨æ¨è¿ä¸­ï¼æ å¼å¸¸</div></div>
+  <div class="sec-title">协同看板 · Ops × Design · 最关键的管理页，专门解决卡点</div>
+
+  <div class="g5">
+    <div class="pnl kpi"><div class="lb">需求一次提交合格率</div><div class="vl cb">82%</div><div class="dl nu">运营提需质量</div></div>
+    <div class="pnl kpi"><div class="lb">平均补充次数</div><div class="vl cv">1.3<span style="font-size:13px">次</span></div><div class="dl up">目标 ≤1.5</div></div>
+    <div class="pnl kpi"><div class="lb">平均评审轮次</div><div class="vl ca">2.1<span style="font-size:13px">轮</span></div><div class="dl dn">↑ 需优化</div></div>
+    <div class="pnl kpi"><div class="lb">立项→上线 Lead Time</div><div class="vl cg">5.5<span style="font-size:13px">天</span></div><div class="dl up">目标 ≤7天</div></div>
+    <div class="pnl kpi"><div class="lb">本周延期项目数</div><div class="vl cr">3<span style="font-size:13px">件</span></div><div class="dl dn">↑ 较上周 +1</div></div>
+  </div>
+
+  <div class="g31">
+    <!-- 各阶段耗时 + 瓶颈 -->
+    <div class="pnl">
+      <div class="ph">各阶段耗时拆解（天）</div>
+      <div class="ch"><canvas id="barChart3"></canvas></div>
     </div>
-    <div class="pnl"><div class="ph">å»¶è¿å½å åæ</div><div style="padding:8px 11px">
-      <div class="pr"><div class="pr-hd"><span>éæ±æè¿°ä¸æ¸</span><span class="pv rd">45%</span></div><div class="pt"><div class="pf rd" style="width:45%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>è®¾è®¡äº§è½ä¸è¶³</span><span class="pv am">30%</span></div><div class="pt"><div class="pf am" style="width:30%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>å®¡æ¹æµç¨æ¢</span><span class="pv bl">15%</span></div><div class="pt"><div class="pf bl" style="width:15%"></div></div></div>
-      <div class="pr"><div class="pr-hd"><span>å¶ä»</span><span class="pv tl">10%</span></div><div class="pt"><div class="pf gn" style="width:10%"></div></div></div>
-    </div></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="pnl">
+        <div class="ph">本周协同瓶颈 <span class="ptag red">自动标红</span></div>
+        <div class="ai"><div class="ado" style="background:var(--red)"></div><div class="atx"><b style="color:var(--red)">高风险：</b>需求描述不清导致设计返工，本周3项延期均值1.5天</div></div>
+        <div class="ai"><div class="ado" style="background:var(--amber)"></div><div class="atx"><b style="color:var(--amber)">中风险：</b>设计产能不足，新媒体素材积压2天</div></div>
+        <div class="ai"><div class="ado" style="background:var(--green)"></div><div class="atx"><b style="color:var(--green)">正常：</b>商标注册流程推进中，无异常</div></div>
+      </div>
+      <div class="pnl">
+        <div class="ph">延迟归因分析</div>
+        <div style="padding:8px 11px">
+          <div class="pr"><div class="pr-hd"><span>需求描述不清</span><span class="pv rd">45%</span></div><div class="pt"><div class="pf rd" style="width:45%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>设计产能不足</span><span class="pv am">30%</span></div><div class="pt"><div class="pf am" style="width:30%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>审批流程慢</span><span class="pv bl">15%</span></div><div class="pt"><div class="pf bl" style="width:15%"></div></div></div>
+          <div class="pr"><div class="pr-hd"><span>其他</span><span class="pv tl">10%</span></div><div class="pt"><div class="pf gn" style="width:10%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下周优化动作 -->
+  <div class="pnl">
+    <div class="ph">下周协同优化动作 · 明确 Owner + Deadline</div>
+    <table class="dt" style="margin:4px 0">
+      <thead><tr><th>优化方向</th><th>责任人</th><th>截止日期</th><th>优先级</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>统一需求提交模板（含5项必填项）</td><td>飞羽</td><td>04-03</td><td><span class="pl bd">高</span></td><td><span class="pl wa">进行中</span></td></tr>
+        <tr><td>建立设计评审双周例会机制</td><td>乔乔</td><td>04-05</td><td><span class="pl bd">高</span></td><td><span class="pl wa">待启动</span></td></tr>
+        <tr><td>黑料网 VI 版本对齐专项会</td><td>青灰</td><td>04-02</td><td><span class="pl bd">高</span></td><td><span class="pl wa">进行中</span></td></tr>
+        <tr><td>短视频内容规范文档沉淀</td><td>雾岚</td><td>04-07</td><td><span class="pl wa">中</span></td><td><span class="pl gy">待处理</span></td></tr>
+      </tbody>
+    </table>
   </div>
 </div>
-<div class="pnl"><div class="ph">ä¸å¨ååä¼åå¨ä½Â·æç¡®Owner+Deadline</div>
-  <table class="dt" style="margin:4px 0"><thead><tr><th>ä¼åæ¹å</th><th>è´£ä»»äºº</th><th>æªæ­¢æ¥æ</th><th>ä¼åçº§</th><th>ç¶æ</th></tr></thead>
-  <tbody>
-    <tr><td>ç»ä¸éæ±æäº¤æ¨¡æ¿ï¼5é¡¹å¿å¡«ï¼</td><td>é£ç¾½</td><td>04-03</td><td><span class="pl bd">é«</span></td><td><span class="pl wa">è¿è¡ä¸­</span></td></tr>
-    <tr><td>å»ºç«è®¾è®¡è¯å®¡åå¨ä¾ä¼</td><td>ä¹ä¹</td><td>04-05</td><td><span class="pl bd">é«</span></td><td><span class="pl wa">å¾å¯å¨</span></td></tr>
-    <tr><td>é»æç½VIçæ¬å¯¹é½ä¸é¡¹ä¼</td><td>éç°</td><td>04-02</td><td><span class="pl bd">é«</span></td><td><span class="pl wa">è¿è¡ä¸­</span></td></tr>
-    <tr><td>ç­è§é¢åå®¹è§èææ¡£æ²æ·</td><td>é¾å²</td><td>04-07</td><td><span class="pl wa">ä¸­</span></td><td><span class="pl gy">å¾å¤ç</span></td></tr>
-  </tbody></table>
-</div>
-</div>
+
+<!-- ═══════════ S4: 周月复盘 ═══════════ -->
 <div class="sc" id="s4">
-<div class="sec-title">å¨/æå¤çä¸­å¿Â·ç®¡çå±åºå®æ¨¡æ¿Â·æ¯å¨åºå®è¾åº6å</div>
-<div class="g2" style="margin-bottom:10px">
-  <div class="pnl"><div class="ph">â  æ¬æç®æ ä¸è¾¾æ</div>
-    <table class="dt" style="margin:4px 0"><thead><tr><th>ç®æ é¡¹</th><th>ç®æ å¼</th><th>å®éå¼</th><th>è¾¾æç</th><th>ç¶æ</th></tr></thead>
-    <tbody>
-      <tr><td>åçæåé</td><td>1000ä¸</td><td>920ä¸</td><td style="color:var(--amber)">92%</td><td><span class="pl wa">æ¥è¿</span></td></tr>
-      <tr><td>äºå¨é</td><td>20ä¸</td><td>23ä¸</td><td style="color:var(--green)">115%</td><td><span class="pl ok">è¶é¢</span></td></tr>
-      <tr><td>è®¾è®¡åæ¶ç</td><td>90%</td><td>87%</td><td style="color:var(--red)">97%</td><td><span class="pl bd">æªè¾¾</span></td></tr>
-      <tr><td>VIåè§ç</td><td>90%</td><td>86%</td><td style="color:var(--red)">96%</td><td><span class="pl bd">æªè¾¾</span></td></tr>
-    </tbody></table></div>
-  <div class="pnl"><div class="ph">â¡ äº®ç¹é¡¹ç®ï¼å¯å¤å¶ç»éªï¼</div>
-    <div class="ai"><div class="ado" style="background:var(--teal)"></div><div class="atx"><b style="color:var(--teal)">â¨ é»æä¸æçåçåçº§ï¼</b>VIè¦çç95%ï¼ç´ æäº§åºæç+30%ï¼å¯æ¨å¹¿</div></div>
-    <div class="ai"><div class="ado" style="background:var(--green)"></div><div class="atx"><b style="color:var(--green)">â¨ 51åçå¾æç©éµï¼</b>äºå¨ç8.3%æ¯åºçº¿2.1åï¼å¯ä½æ¨¡æ¿å¤ç¨</div></div>
-    <div class="ai"><div class="ado" style="background:var(--blue)"></div><div class="atx"><b style="color:var(--blue)">â¨ è®¾è®¡ååå¨ä¼ï¼</b>éæ±è¡¥åæ¬¡æ°ä»2.1æ¬¡éè³1.3æ¬¡</div></div>
-  </div>
-</div>
-<div class="g2">
-  <div class="pnl"><div class="ph">â¢ æªè¾¾æé¡¹ååå  <span class="ptag red">éå³æ³¨</span></div>
-    <div class="ai"><div class="ado" style="background:var(--red)"></div><div class="atx"><b style="color:var(--red)">è®¾è®¡åæ¶ç87%&lt;90%ï¼</b>é»æç½éæ±é¢ç¹åæ´å¯¼è´3ä»¶å»¶æï¼ééç¨¿æºå¶</div></div>
-    <div class="ai"><div class="ado" style="background:var(--amber)"></div><div class="atx"><b style="color:var(--amber)">VIåè§ç86%&lt;90%ï¼</b>ä¹ä¹æ´»å¨ç©æä¸»è²åå·®ï¼éå¯¹é½ææ°è²æ¿</div></div>
-  </div>
-  <div class="pnl"><div class="ph">â¤ éç¹é£é©æ¸å</div>
-    <table class="dt" style="margin:4px 0"><thead><tr><th>é£é©é¡¹</th><th>ç­çº§</th><th>å½±å</th><th>è´è´£äºº</th></tr></thead>
-    <tbody>
-      <tr><td>é»æç½VIçæ¬ä¸ä¸è´</td><td><span class="pl bd">é«</span></td><td>åçä¸è´æ§åæ</td><td>éç°</td></tr>
-      <tr><td>è®¾è®¡äº§è½è¿è½½ï¼ä¹ä¹ï¼</td><td><span class="pl bd">é«</span></td><td>äº¤ä»å»¶è¯¯é£é©</td><td>ç»é¿</td></tr>
-      <tr><td>ç­è§é¢å®æ­çä¸æ»</td><td><span class="pl wa">ä¸­</span></td><td>æåè§¦è¾¾éä½</td><td>é¾å²</td></tr>
-      <tr><td>ç«åéº»è±è¿æUIå¤§æ¹ç</td><td><span class="pl wa">ä¸­</span></td><td>è§è§å·®å¼ååå</td><td>é£ç¾½</td></tr>
-    </tbody></table>
-  </div>
-</div>
-<div class="pnl"><div class="ph">â¥ ä¸å¨è¡å¨æ¸å <span class="ptag teal">ç®¡çå±</span></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 10px">
-    <div><div style="font-size:9px;color:var(--t3);margin-bottom:6px">åçè¿è¥</div>
-      <div class="tli"><div class="tld" style="background:rgba(255,77,102,.3);border-color:var(--red)"></div><div class="tlb"><div class="tlt">é»æç½VIçæ¬å¯¹é½</div><div class="tls">éç°Â·å¨äºæªæ­¢</div></div></div>
-      <div class="tli"><div class="tld" style="background:rgba(255,190,92,.3);border-color:var(--amber)"></div><div class="tlb"><div class="tlt">ç­è§é¢åå®¹èå¥ä¼å</div><div class="tls">é¾å²Â·å¨ä¸æªæ­¢</div></div></div>
-      <div class="tli"><div class="tld" style="background:rgba(19,213,195,.3);border-color:var(--teal)"></div><div class="tlb"><div class="tlt">51åçå¾æç­ç¥å¤ç</div><div class="tls">éç°Â·å¨åæªæ­¢</div></div></div>
+  <div class="sec-title">周/月复盘中心 · 管理层固定模板 · 每周固定输出 6 块</div>
+
+  <div class="g2" style="margin-bottom:10px">
+    <!-- 1. 本期目标与达成 -->
+    <div class="pnl">
+      <div class="ph">① 本期目标与达成</div>
+      <table class="dt" style="margin:4px 0">
+        <thead><tr><th>目标项</th><th>目标值</th><th>实际值</th><th>达成率</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td>品牌曝光量</td><td>1000万</td><td>920万</td><td style="color:var(--amber)">92%</td><td><span class="pl wa">接近</span></td></tr>
+          <tr><td>互动量</td><td>20万</td><td>23万</td><td style="color:var(--green)">115%</td><td><span class="pl ok">超额</span></td></tr>
+          <tr><td>设计准时率</td><td>90%</td><td>87%</td><td style="color:var(--red)">97%</td><td><span class="pl bd">未达</span></td></tr>
+          <tr><td>VI 合规率</td><td>90%</td><td>86%</td><td style="color:var(--red)">96%</td><td><span class="pl bd">未达</span></td></tr>
+        </tbody>
+      </table>
     </div>
-    <div><div style="font-size:9px;color:var(--t3);margin-bottom:6px">åçè®¾è®¡</div>
-      <div class="tli"><div class="tld" style="background:rgba(255,77,102,.3);border-color:var(--red)"></div><div class="tlb"><div class="tlt">éæ±æäº¤æ¨¡æ¿è½å°</div><div class="tls">é£ç¾½Â·å¨åæªæ­¢</div></div></div>
-      <div class="tli"><div class="tld" style="background:rgba(102,114,255,.3);border-color:var(--blue)"></div><div class="tlb"><div class="tlt">è®¾è®¡è¯å®¡åå¨ä¾ä¼å»ºç«</div><div class="tls">ä¹ä¹Â·å¨äºæªæ­¢</div></div></div>
-      <div class="tli"><div class="tld" style="background:rgba(52,211,153,.3);border-color:var(--green)"></div><div class="tlb"><div class="tlt">æ¯æ¥å¤§èµè²å½©è§èæ´æ°</div><div class="tls">ä¹ä¹Â·ä¸å¨ä¸æªæ­¢</div></div></div>
+    <!-- 2. 亮点项目 -->
+    <div class="pnl">
+      <div class="ph">② 亮点项目（可复制经验）</div>
+      <div class="ai"><div class="ado" style="background:var(--teal)"></div><div class="atx"><b style="color:var(--teal)">✨ 黑料不打烊品牌升级：</b>VI覆盖率达95%，新媒体素材产出效率+30%，模式可推广至其他品牌</div></div>
+      <div class="ai"><div class="ado" style="background:var(--green)"></div><div class="atx"><b style="color:var(--green)">✨ 51吃瓜图文矩阵：</b>互动率8.3%是基线2.1倍，内容节奏可作为模板复用</div></div>
+      <div class="ai"><div class="ado" style="background:var(--blue)"></div><div class="atx"><b style="color:var(--blue)">✨ 设计协同周会：</b>自建立后需求补充次数从2.1次降至1.3次</div></div>
     </div>
   </div>
+
+  <div class="g2">
+    <!-- 3. 未达成原因 -->
+    <div class="pnl">
+      <div class="ph">③ 未达成项及原因 <span class="ptag red">需关注</span></div>
+      <div class="ai"><div class="ado" style="background:var(--red)"></div><div class="atx"><b style="color:var(--red)">设计准时率 87% < 90%：</b>黑料网需求频繁变更（+3次）导致3件延期，需强制锁稿机制</div></div>
+      <div class="ai"><div class="ado" style="background:var(--amber)"></div><div class="atx"><b style="color:var(--amber)">VI 合规率 86% < 90%：</b>乔乔产出的活动物料主色偏差，需对齐最新色板</div></div>
+      <div class="ai"><div class="ado" style="background:var(--amber)"></div><div class="atx"><b style="color:var(--amber)">黑料网版本不一致：</b>Web端与App端版本差异，责任人青灰需在04-02前完成对齐</div></div>
+    </div>
+    <!-- 5. 重点风险 -->
+    <div class="pnl">
+      <div class="ph">⑤ 重点风险清单</div>
+      <table class="dt" style="margin:4px 0">
+        <thead><tr><th>风险项</th><th>等级</th><th>影响</th><th>负责人</th></tr></thead>
+        <tbody>
+          <tr><td>黑料网 VI 版本不一致</td><td><span class="pl bd">高</span></td><td>品牌一致性受损</td><td>青灰</td></tr>
+          <tr><td>设计产能过载（乔乔）</td><td><span class="pl bd">高</span></td><td>交付延误风险</td><td>组长</td></tr>
+          <tr><td>短视频完播率下滑</td><td><span class="pl wa">中</span></td><td>曝光触达降低</td><td>雾岚</td></tr>
+          <tr><td>竞品麻豆近期 UI 大改版</td><td><span class="pl wa">中</span></td><td>视觉差异化压力</td><td>飞羽</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 6. 下周行动清单 -->
+  <div class="pnl">
+    <div class="ph">⑥ 下周行动清单 · 负责人 + 时间 <span class="ptag teal">管理层</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 10px">
+      <div>
+        <div style="font-size:9px;color:var(--t3);margin-bottom:6px;letter-spacing:.5px">品牌运营</div>
+        <div class="tli"><div class="tld" style="background:rgba(255,77,102,.3);border-color:var(--red)"></div><div class="tlb"><div class="tlt">黑料网 VI 版本对齐</div><div class="tls">青灰 · 周二截止</div></div></div>
+        <div class="tli"><div class="tld" style="background:rgba(255,190,92,.3);border-color:var(--amber)"></div><div class="tlb"><div class="tlt">短视频内容节奏优化</div><div class="tls">雾岚 · 周三截止</div></div></div>
+        <div class="tli"><div class="tld" style="background:rgba(19,213,195,.3);border-color:var(--teal)"></div><div class="tlb"><div class="tlt">51吃瓜图文策略复盘</div><div class="tls">青灰 · 周四截止</div></div></div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:var(--t3);margin-bottom:6px;letter-spacing:.5px">品牌设计</div>
+        <div class="tli"><div class="tld" style="background:rgba(255,77,102,.3);border-color:var(--red)"></div><div class="tlb"><div class="tlt">需求提交模板落地</div><div class="tls">飞羽 · 周四截止</div></div></div>
+        <div class="tli"><div class="tld" style="background:rgba(102,114,255,.3);border-color:var(--blue)"></div><div class="tlb"><div class="tlt">设计评审双周例会建立</div><div class="tls">乔乔 · 周五截止</div></div></div>
+        <div class="tli"><div class="tld" style="background:rgba(52,211,153,.3);border-color:var(--green)"></div><div class="tlb"><div class="tlt">每日大赛色彩规范更新</div><div class="tls">乔乔 · 下周一截止</div></div></div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
+
+<!-- ═══════════ S5: 岗位管理 ═══════════ -->
 <div class="sc" id="s5">
-<div class="sec-title">å²ä½ç®¡çç»´åº¦Â·100åå¶è¯åä½ç³»Â·ç»©ææ²éä¸èµæºè°æ´ä¾æ®</div>
-<div class="g2" style="margin-bottom:10px">
-  <div class="pnl"><div class="ph">åçè¿è¥è¯åÂ·100åå¶</div>
-    <div class="g2" style="margin:8px 10px;gap:8px">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">ç»æè¾¾æ 40%</div><div style="font-size:22px;font-weight:700;color:var(--teal)">38.4<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:96%"></div></div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">æ§è¡æç 30%</div><div style="font-size:22px;font-weight:700;color:var(--blue)">27.0<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:90%"></div></div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">ååè´¨é 20%</div><div style="font-size:22px;font-weight:700;color:var(--amber)">16.0<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf am" style="width:80%"></div></div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">å¤çæ¹è¿ 10%</div><div style="font-size:22px;font-weight:700;color:var(--green)">10.0<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf gn" style="width:100%"></div></div></div></div>
+  <div class="sec-title">岗位管理维度 · 100 分制评分体系 · 绩效沟通与资源调整依据</div>
+
+  <div class="g2" style="margin-bottom:10px">
+    <!-- 运营评分 -->
+    <div class="pnl">
+      <div class="ph">品牌运营评分 · 100分制</div>
+      <div class="g2" style="margin:8px 10px;gap:8px">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">结果达成 40%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--teal)">38.4<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:96%"></div></div></div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">执行效率 30%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--blue)">27.0<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:90%"></div></div></div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">协同质量 20%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--amber)">16.0<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf am" style="width:80%"></div></div></div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">复盘改进 10%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--green)">10.0<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf gn" style="width:100%"></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:8px;gap:16px">
+        <div style="font-size:36px;font-weight:700;color:var(--teal)">92</div>
+        <div><div style="font-size:11px;color:var(--t2);margin-bottom:3px">综合评分</div><span class="pl ok" style="font-size:11px">优秀</span></div>
+      </div>
+      <div class="ph" style="padding-bottom:6px">评分趋势</div>
+      <div class="ch" style="padding:4px 10px 8px"><canvas id="lineChart5a" style="max-height:80px"></canvas></div>
     </div>
-    <div style="display:flex;align-items:center;justify-content:center;padding:8px;gap:16px"><div style="font-size:42px;font-weight:700;color:var(--teal)">92</div><div><div style="font-size:11px;color:var(--t2);margin-bottom:3px">ç»¼åè¯å</div><span class="pl ok" style="font-size:11px">ä¼ç§</span></div></div>
-    <div class="ph" style="padding-bottom:6px">è¯åè¶å¿</div>
-    <div class="ch" style="padding:4px 10px 8px"><canvas id="lineChart5a" style="max-height:80px"></canvas></div>
+
+    <!-- 设计评分 -->
+    <div class="pnl">
+      <div class="ph">品牌设计评分 · 100分制</div>
+      <div class="g2" style="margin:8px 10px;gap:8px">
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">交付效率 35%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--amber)">28.0<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf am" style="width:80%"></div></div></div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">质量一致性 35%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--teal)">31.5<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:90%"></div></div></div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">协同响应 20%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--blue)">18.0<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:90%"></div></div></div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px">
+          <div style="font-size:9px;color:var(--t3);margin-bottom:3px">规范沉淀 10%</div>
+          <div style="font-size:22px;font-weight:700;color:var(--red)">10.5<span style="font-size:11px">分</span></div>
+          <div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:100%"></div></div></div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:8px;gap:16px">
+        <div style="font-size:36px;font-weight:700;color:var(--blue)">88</div>
+        <div><div style="font-size:11px;color:var(--t2);margin-bottom:3px">综合评分</div><span class="pl bl" style="font-size:11px">良好</span></div>
+      </div>
+      <div class="ph" style="padding-bottom:6px">评分趋势</div>
+      <div class="ch" style="padding:4px 10px 8px"><canvas id="lineChart5b" style="max-height:80px"></canvas></div>
+    </div>
   </div>
-  <div class="pnl"><div class="ph">åçè®¾è®¡è¯åÂ·100åå¶</div>
-    <div class="g2" style="margin:8px 10px;gap:8px">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">äº¤ä»æç 35%</div><div style="font-size:22px;font-weight:700;color:var(--amber)">28.0<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf am" style="width:80%"></div></div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">è´¨éä¸è´æ§ 35%</div><div style="font-size:22px;font-weight:700;color:var(--teal)">31.5<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:90%"></div></div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">ååååº 20%</div><div style="font-size:22px;font-weight:700;color:var(--blue)">18.0<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf bl" style="width:90%"></div></div></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:var(--t3);margin-bottom:3px">è§èæ²æ· 10%</div><div style="font-size:22px;font-weight:700;color:var(--green)">10.5<span style="font-size:11px">å</span></div><div class="pr" style="margin-top:4px"><div class="pt"><div class="pf gn" style="width:100%"></div></div></div></div>
+
+  <!-- 数据源 & 导航 -->
+  <div class="g2">
+    <div class="pnl">
+      <div class="ph">看板导航 · 快速下钻</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 10px">
+        <div onclick="sw('s0',document.querySelectorAll('.tab')[0])" style="background:rgba(102,114,255,.1);border:1px solid rgba(102,114,255,.25);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">00_ 总览首页</div>
+        <div onclick="sw('s1',document.querySelectorAll('.tab')[1])" style="background:rgba(19,213,195,.08);border:1px solid rgba(19,213,195,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">01_ 运营结果</div>
+        <div onclick="sw('s1',document.querySelectorAll('.tab')[1])" style="background:rgba(19,213,195,.08);border:1px solid rgba(19,213,195,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">02_ 运营执行</div>
+        <div onclick="sw('s2',document.querySelectorAll('.tab')[2])" style="background:rgba(255,190,92,.08);border:1px solid rgba(255,190,92,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">03_ 设计效率</div>
+        <div onclick="sw('s2',document.querySelectorAll('.tab')[2])" style="background:rgba(255,190,92,.08);border:1px solid rgba(255,190,92,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">04_ 设计质量</div>
+        <div onclick="sw('s3',document.querySelectorAll('.tab')[3])" style="background:rgba(255,77,102,.08);border:1px solid rgba(255,77,102,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">05_ 协同瓶颈</div>
+        <div style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">06_ 预算产出</div>
+        <div onclick="sw('s4',document.querySelectorAll('.tab')[4])" style="background:rgba(102,114,255,.1);border:1px solid rgba(102,114,255,.25);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">07_ 周报月报</div>
+      </div>
     </div>
-    <div style="display:flex;align-items:center;justify-content:center;padding:8px;gap:16px"><div style="font-size:42px;font-weight:700;color:var(--blue)">88</div><div><div style="font-size:11px;color:var(--t2);margin-bottom:3px">ç»¼åè¯å</div><span class="pl bl" style="font-size:11px">è¯å¥½</span></div></div>
-    <div class="ph" style="padding-bottom:6px">è¯åè¶å¿</div>
-    <div class="ch" style="padding:4px 10px 8px"><canvas id="lineChart5b" style="max-height:80px"></canvas></div>
+    <div class="pnl">
+      <div class="ph">新媒体实时平台入口</div>
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px">
+        <div style="font-size:13px;font-weight:600;color:var(--t2)">📡 新媒体数据统筹平台</div>
+        <div style="font-size:10px;color:var(--t3);text-align:center">品宣部实时数据 · 内网环境访问<br><span style="opacity:.6">http://76.13.214.108:8501/</span></div>
+        <a href="http://76.13.214.108:8501/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--blue),var(--teal));color:#fff;text-decoration:none;padding:9px 20px;border-radius:999px;font-size:12px;font-weight:600">打开实时看板 →</a>
+        <div style="font-size:10px;color:var(--amber);background:rgba(255,190,92,.08);border:1px solid rgba(255,190,92,.2);border-radius:6px;padding:6px 12px;text-align:center">⚠ 需在团队内网环境下访问</div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="g2">
-  <div class="pnl"><div class="ph">çæ¿å¯¼èªÂ·å¿«éä¸é»</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px 10px">
-      <div onclick="sw('s0',document.querySelectorAll('.tab')[0])" style="background:rgba(102,114,255,.1);border:1px solid rgba(102,114,255,.25);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">00_ æ»è§é¦é¡µ</div>
-      <div onclick="sw('s1',document.querySelectorAll('.tab')[1])" style="background:rgba(19,213,195,.08);border:1px solid rgba(19,213,195,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">01_ è¿è¥ç»æ</div>
-      <div onclick="sw('s2',document.querySelectorAll('.tab')[2])" style="background:rgba(255,190,92,.08);border:1px solid rgba(255,190,92,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">03_ è®¾è®¡æç</div>
-      <div onclick="sw('s3',document.querySelectorAll('.tab')[3])" style="background:rgba(255,77,102,.08);border:1px solid rgba(255,77,102,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">05_ ååç¶é¢</div>
-      <div onclick="sw('s4',document.querySelectorAll('.tab')[4])" style="background:rgba(102,114,255,.1);border:1px solid rgba(102,114,255,.25);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">07_ å¨æ¥ææ¥</div>
-      <div onclick="sw('s5',document.querySelectorAll('.tab')[5])" style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:7px;padding:8px 10px;cursor:pointer;font-size:10px;color:var(--t2)">08_ å²ä½è¯å</div>
-    </div>
-  </div>
-  <div class="pnl"><div class="ph">æ°åªä½å®æ¶å¹³å°å¥å£</div>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px">
-      <div style="font-size:13px;font-weight:600;color:var(--t2)">ð¡ æ°åªä½æ°æ®ç»ç­¹å¹³å°</div>
-      <div style="font-size:10px;color:var(--t3);text-align:center">åå®£é¨å®æ¶æ°æ®Â·åç½ç¯å¢è®¿é®</div>
-      <a href="http://76.13.214.108:8501/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(90deg,var(--blue),var(--teal));color:#fff;text-decoration:none;padding:9px 20px;border-radius:999px;font-size:12px;font-weight:600">æå¼å®æ¶çæ¿ â</a>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-<div class="footer">åçç»BIæ°å­çæ¿ v2.0 Â· åå®£é¨ Â· <span id="fd">2026-04-01</span></div>
+
+</div><!-- /main -->
+<div class="footer">品牌组 BI 数字看板 v2.0 · 品宣部 · 数据更新：<span id="fd">2026-04-01</span></div>
+
 <script>
-(function t(){const n=new Date(),p=v=>String(v).padStart(2,'0');document.getElementById('clk').textContent='ð '+p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());setTimeout(t,1000)})();
-const cm={s0:'é¦é¡µæ»è§',s1:'åçè¿è¥',s2:'åçè®¾è®¡',s3:'ååçæ¿',s4:'å¨æå¤ç',s5:'å²ä½ç®¡ç'};
-function sw(id,btn){document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));document.getElementById(id).classList.add('on');btn.classList.add('on');document.getElementById('cm').textContent=cm[id];}
-const tS={color:'#697699',font:{size:9}};
+// 时钟
+(function t(){const n=new Date(),p=v=>String(v).padStart(2,'0');document.getElementById('clk').textContent='🕐 '+p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());setTimeout(t,1000)})();
+
+// 切换
+const cm={s0:'首页总览',s1:'品牌运营',s2:'品牌设计',s3:'协同看板',s4:'周月复盘',s5:'岗位管理'};
+function sw(id,btn){
+  document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  document.getElementById('cm').textContent=cm[id];
+}
+
+const C=v=>({color:v,font:{size:9}}),GR=(c,a)=>`rgba(${c},${a})`;
+const BLUE=[102,114,255],TEAL=[19,213,195],RED=[255,77,102],AMB=[255,190,92],GRN=[52,211,153],GRY=[105,118,153];
+const grid={color:'rgba(29,42,68,.5)'},tickStyle={color:'#697699',font:{size:9}};
+
+// 雷达图
 new Chart(document.getElementById('radarChart').getContext('2d'),{
   type:'radar',
   data:{
@@ -408,22 +700,91 @@ new Chart(document.getElementById('radarChart').getContext('2d'),{
       ticks:{display:false},pointLabels:{color:'#9da8c5',font:{size:12}},min:0,max:100}},
     plugins:{legend:{labels:{color:'#9da8c5',font:{size:10},boxWidth:10},position:'bottom'}}}
 });
+
+// 环形图
 new Chart(document.getElementById('donutChart').getContext('2d'),{
   type:'doughnut',
   data:{
-    labels:['logo','IP/吉祥物','VI/手册','新媒体物料','海报/活动','其他'],
-    datasets:[{data:[22,15,15,24,17,7],backgroundColor:['#6672ff','#13d5c3','#ffbe5c','#34d399','#ff4d66','#697699'],borderWidth:0,hoverOffset:6}]
+    labels:['logo', 'IP/吉祥物', 'VI/手册', '新媒体物料', '海报/活动', '其他'],
+    datasets:[{data:[22, 15, 15, 24, 17, 7],backgroundColor:['#6672ff','#13d5c3','#ffbe5c','#34d399','#ff4d66','#697699'],borderWidth:0,hoverOffset:6}]
   },
   options:{responsive:true,cutout:'62%',plugins:{
     legend:{position:'bottom',labels:{color:'#9da8c5',font:{size:10},boxWidth:10,padding:8}},
     tooltip:{callbacks:{label:d=>`${d.label}: ${d.raw}%`}}
   }}
 });
-new Chart(document.getElementById('lineChart0').getContext('2d'),{type:'line',data:{labels:['W1','W2','W3','W4','W5','W6','W7','W8'],datasets:[{label:'æå(ä¸)',data:[210,245,280,310,290,320,290,315],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.07)',tension:.4,pointRadius:3,borderWidth:2,fill:true},{label:'äºå¨(å)',data:[8.2,9.1,10.5,11.2,9.8,12.1,11.0,12.8],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.06)',tension:.4,pointRadius:3,borderWidth:1.5,fill:true,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS},y1:{position:'right',grid:{display:false},ticks:tS}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}});
-new Chart(document.getElementById('barChart1').getContext('2d'),{type:'bar',data:{labels:['W1','W2','W3','W4','W5','W6'],datasets:[{label:'ç®æ æå',data:[160,165,170,175,180,185],backgroundColor:'rgba(102,114,255,.25)',borderRadius:3},{label:'å®éæå',data:[150,162,175,168,185,178],backgroundColor:'rgba(19,213,195,.4)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:tS},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}});
-new Chart(document.getElementById('barChart1b').getContext('2d'),{type:'bar',data:{labels:['å¾æ','ç­è§é¢','ç´æ­','æ´»å¨H5'],datasets:[{label:'äºå¨ç%',data:[8.3,3.2,5.6,4.8],backgroundColor:['rgba(19,213,195,.5)','rgba(255,77,102,.45)','rgba(102,114,255,.45)','rgba(255,190,92,.45)'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:tS},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS}},plugins:{legend:{display:false}}}});
-new Chart(document.getElementById('lineChart2').getContext('2d'),{type:'line',data:{labels:['W1','W2','W3','W4','W5','W6','W7','W8'],datasets:[{label:'åæ¶äº¤ä»ç%',data:[85,88,84,87,86,89,87,87],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.07)',tension:.4,pointRadius:3,borderWidth:2,fill:true},{label:'è¿å·¥ç%',data:[28,25,30,26,27,24,25,25],borderColor:'#ff4d66',backgroundColor:'rgba(255,77,102,.06)',tension:.4,pointRadius:3,borderWidth:1.5,fill:true,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS,min:70,max:100},y1:{position:'right',grid:{display:false},ticks:tS,min:0,max:40}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}});
-new Chart(document.getElementById('barChart3').getContext('2d'),{type:'bar',data:{labels:['æå','è®¾è®¡','è¯å®¡','åå¸'],datasets:[{label:'å¹³åå¤©æ°',data:[0.5,2.8,1.2,0.8],backgroundColor:['rgba(102,114,255,.5)','rgba(255,190,92,.5)','rgba(255,77,102,.5)','rgba(52,211,153,.5)'],borderRadius:5}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS},y:{grid:{display:false},ticks:tS}},plugins:{legend:{display:false}}}});
-const mkL=(id,data,color)=>new Chart(document.getElementById(id).getContext('2d'),{type:'line',data:{labels:['W1','W2','W3','W4'],datasets:[{data,borderColor:color,backgroundColor:color.replace('rgb(','rgba(').replace(')',',0.1)'),tension:.4,pointRadius:2,borderWidth:2,fill:true}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{display:false},y:{display:false,min:75,max:100}},plugins:{legend:{display:false}}}});
-mkL('lineChart5a',[88,90,91,92],'rgb(19,213,195)');mkL('lineChart5b',[85,86,87,88],'rgb(102,114,255)');
-</script></body></html>
+
+// 首页折线
+new Chart(document.getElementById('lineChart0').getContext('2d'),{
+  type:'line',
+  data:{
+    labels:['W1','W2','W3','W4','W5','W6','W7','W8'],
+    datasets:[
+      {label:'曝光（万）',data:[210,245,280,310,290,320,290,315],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.07)',tension:.4,pointRadius:3,borderWidth:2,fill:true},
+      {label:'互动（千）',data:[8.2,9.1,10.5,11.2,9.8,12.1,11.0,12.8],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.06)',tension:.4,pointRadius:3,borderWidth:1.5,fill:true,yAxisID:'y1'}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:'rgba(29,42,68,.4)'},ticks:tickStyle},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tickStyle},y1:{position:'right',grid:{display:false},ticks:tickStyle}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}
+});
+
+// 运营柱状图
+new Chart(document.getElementById('barChart1').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['W1','W2','W3','W4','W5','W6'],
+    datasets:[
+      {label:'目标曝光',data:[160,165,170,175,180,185],backgroundColor:'rgba(102,114,255,.25)',borderRadius:3},
+      {label:'实际曝光',data:[150,162,175,168,185,178],backgroundColor:'rgba(19,213,195,.4)',borderRadius:3}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:tickStyle},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tickStyle}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}
+});
+
+// 内容类型表现
+new Chart(document.getElementById('barChart1b').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['图文','短视频','直播','活动H5'],
+    datasets:[
+      {label:'互动率%',data:[8.3,3.2,5.6,4.8],backgroundColor:['rgba(19,213,195,.5)','rgba(255,77,102,.45)','rgba(102,114,255,.45)','rgba(255,190,92,.45)'],borderRadius:4}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:tickStyle},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tickStyle}},plugins:{legend:{display:false}}}
+});
+
+// 设计折线
+new Chart(document.getElementById('lineChart2').getContext('2d'),{
+  type:'line',
+  data:{
+    labels:['W1','W2','W3','W4','W5','W6','W7','W8'],
+    datasets:[
+      {label:'准时交付率%',data:[85,88,84,87,86,89,87,87],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.07)',tension:.4,pointRadius:3,borderWidth:2,fill:true},
+      {label:'返工率%',data:[28,25,30,26,27,24,25,25],borderColor:'#ff4d66',backgroundColor:'rgba(255,77,102,.06)',tension:.4,pointRadius:3,borderWidth:1.5,fill:true,yAxisID:'y1'}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:'rgba(29,42,68,.4)'},ticks:tickStyle},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tickStyle,min:70,max:100},y1:{position:'right',grid:{display:false},ticks:tickStyle,min:0,max:40}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}
+});
+
+// 协同耗时柱
+new Chart(document.getElementById('barChart3').getContext('2d'),{
+  type:'bar',
+  data:{
+    labels:['提单','设计','评审','发布'],
+    datasets:[
+      {label:'平均天数',data:[0.5,2.8,1.2,0.8],backgroundColor:['rgba(102,114,255,.5)','rgba(255,190,92,.5)','rgba(255,77,102,.5)','rgba(52,211,153,.5)'],borderRadius:5}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{grid:{color:'rgba(29,42,68,.4)'},ticks:tickStyle},y:{grid:{display:false},ticks:tickStyle}},plugins:{legend:{display:false}}}
+});
+
+// 岗位评分趋势
+const mkSmLine=(id,data,color)=>new Chart(document.getElementById(id).getContext('2d'),{
+  type:'line',
+  data:{labels:['3月W1','3月W2','3月W3','3月W4'],datasets:[{data,borderColor:color,backgroundColor:color.replace(')',',0.1)').replace('rgb','rgba'),tension:.4,pointRadius:2,borderWidth:2,fill:true}]},
+  options:{responsive:true,maintainAspectRatio:false,scales:{x:{display:false},y:{display:false,min:75,max:100}},plugins:{legend:{display:false}}}
+});
+mkSmLine('lineChart5a',[88,90,91,92],'#13d5c3');
+mkSmLine('lineChart5b',[85,86,87,88],'#6672ff');
+</script>
+</body>
+</html>
