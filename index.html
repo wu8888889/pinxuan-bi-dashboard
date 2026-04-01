@@ -40,7 +40,7 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .g5{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .g31{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:10px}
-.g321{display:grid;grid-template-columns:320px 1fr 260px;gap:10px;margin-bottom:10px}
+.g321{display:grid;grid-template-columns:430px 1fr 260px;gap:10px;margin-bottom:10px}
 .g32{display:grid;grid-template-columns:290px 1fr 370px;gap:10px;margin-bottom:10px}
 .kpi{padding:12px 14px}
 .kpi .lb{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px;margin-bottom:4px}
@@ -82,7 +82,7 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 .tld{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:1px;border:2px solid}
 .tlb{flex:1}.tlt{font-size:13px;font-weight:600;color:var(--t1)}.tls{font-size:11px;color:var(--t3);margin-top:1px}
 .ch{padding:6px 10px 8px}.ch canvas{max-height:200px}
-.ch-sm canvas{max-height:165px}.ch-r canvas{max-height:220px}.ch-l canvas{max-height:185px;min-height:150px}
+.ch-sm canvas{max-height:165px}.ch-r canvas{max-height:310px}.ch-l canvas{max-height:185px;min-height:150px}
 .hm{display:grid;grid-template-columns:auto repeat(5,1fr);gap:2px;padding:8px 10px;font-size:9px}
 .hm .hl{color:var(--t3);text-align:center;padding:2px;font-size:11px}.hm .hr{color:var(--t3);padding:4px 6px;font-size:11px}
 .hmc{border-radius:3px;height:28px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
@@ -101,7 +101,7 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
   <div class="nr"><div class="clk" id="clk">ð --:--:--</div><div class="onl"><span class="gd"></span>SYSTEM ONLINE</div></div>
 </div>
 <div class="meta"><span class="md"></span>æè¿å·æ°ï¼<span id="rt">2026-03-31</span><span class="md"></span>ç«åçæµï¼æ¯4å°æ¶<span class="md"></span>å½åï¼<span id="cm">é¦é¡µæ»è§</span></div>
-<div class="warn"><b>é£é©é¢è­¦ï¼</b>è®¾è®¡è¿å·¥ç25%åé«ï¼é»æç½VIçæ¬ä¸ä¸è´ï¼éè·è¿ã</div>
+<div class="warn"><b>竞品预警 2026-04-01：</b>麻豆网上线「黑料泄密-热门吃瓜」专区，Pornhub推Premium 7天免费+Fanhub创作者生态上线，需重点关注。</div>
 <div class="main">
 <div class="sc on" id="s0">
 <div class="sec-title">é¦é¡µæ»è§ Â· Executive Dashboard Â· ä»æ¥åçç»ç»¼åå¥åº·åº¦</div>
@@ -385,14 +385,40 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 </div>
 </div>
 </div>
-<div class="footer">åçç»BIæ°å­çæ¿ v2.0 Â· åå®£é¨ Â· <span id="fd">2026-03-31</span></div>
+<div class="footer">åçç»BIæ°å­çæ¿ v2.0 Â· åå®£é¨ Â· <span id="fd">2026-04-01</span></div>
 <script>
 (function t(){const n=new Date(),p=v=>String(v).padStart(2,'0');document.getElementById('clk').textContent='ð '+p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());setTimeout(t,1000)})();
 const cm={s0:'é¦é¡µæ»è§',s1:'åçè¿è¥',s2:'åçè®¾è®¡',s3:'ååçæ¿',s4:'å¨æå¤ç',s5:'å²ä½ç®¡ç'};
 function sw(id,btn){document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));document.getElementById(id).classList.add('on');btn.classList.add('on');document.getElementById('cm').textContent=cm[id];}
 const tS={color:'#697699',font:{size:9}};
-new Chart(document.getElementById('radarChart').getContext('2d'),{type:'radar',data:{labels:['åçæ´»å¨','è§å¬è§','åçå½¢è±¡','åå®¹ç­ç¹','æç¥å¸å±'],datasets:[{label:'ææ¹é¡¹ç®',data:[85,88,90,78,86],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.18)',pointBackgroundColor:'#6672ff',pointRadius:4,borderWidth:2},{label:'ç«ååå¼',data:[78,82,76,85,72],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.1)',pointBackgroundColor:'#13d5c3',pointRadius:3,borderWidth:1.5,borderDash:[3,3]},{label:'éº»è±ç½',data:[82,90,80,72,78],borderColor:'#ff4d66',backgroundColor:'rgba(255,77,102,.06)',pointBackgroundColor:'#ff4d66',pointRadius:3,borderWidth:1.2,borderDash:[4,4]}]},options:{responsive:true,maintainAspectRatio:true,scales:{r:{grid:{color:'rgba(29,42,68,.7)'},angleLines:{color:'rgba(29,42,68,.7)'},ticks:{display:false},pointLabels:{color:'#9da8c5',font:{size:10}},min:0,max:100}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'bottom'}}}});
-new Chart(document.getElementById('donutChart').getContext('2d'),{type:'doughnut',data:{labels:['å®£åå¾','IPè®¾è®¡','VIç©æ','æ´»å¨ä¸»è§è§','è§é¢å°é¢','å¶ä»'],datasets:[{data:[28,22,20,15,10,5],backgroundColor:['#6672ff','#13d5c3','#697699','#ffbe5c','#34d399','#ff4d66'],borderWidth:0,hoverOffset:5}]},options:{responsive:true,cutout:'60%',plugins:{legend:{position:'bottom',labels:{color:'#9da8c5',font:{size:9},boxWidth:9,padding:8}}}}});
+new Chart(document.getElementById('radarChart').getContext('2d'),{
+  type:'radar',
+  data:{
+    labels:['视觉表现','用户互动','内容热度','产品迭代','综合评分'],
+    datasets:[
+      {label:'我方项目',data:[88,85,82,86,85],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.13)',pointBackgroundColor:'#13d5c3',pointRadius:5,borderWidth:2.5,order:0},
+      {label:'Pornhub',data:[100,100,100,100,95],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.12)',pointBackgroundColor:'#6672ff',pointRadius:4,borderWidth:2,order:1},
+      {label:'麻豆网',data:[80,80,80,80,80],borderColor:'#ff4d66',backgroundColor:'rgba(255,77,102,.07)',pointBackgroundColor:'#ff4d66',pointRadius:4,borderWidth:1.8,borderDash:[4,3],order:2},
+      {label:'海角网',data:[60,80,80,60,65],borderColor:'#ffbe5c',backgroundColor:'rgba(255,190,92,.06)',pointBackgroundColor:'#ffbe5c',pointRadius:3,borderWidth:1.5,borderDash:[3,3],order:3},
+      {label:'MissAV',data:[0,0,0,0,40],borderColor:'#697699',backgroundColor:'rgba(105,118,153,.04)',pointBackgroundColor:'#697699',pointRadius:3,borderWidth:1.2,borderDash:[2,4],order:4}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:true,
+    scales:{r:{grid:{color:'rgba(29,42,68,.6)'},angleLines:{color:'rgba(29,42,68,.6)'},
+      ticks:{display:false},pointLabels:{color:'#9da8c5',font:{size:12}},min:0,max:100}},
+    plugins:{legend:{labels:{color:'#9da8c5',font:{size:10},boxWidth:10},position:'bottom'}}}
+});
+new Chart(document.getElementById('donutChart').getContext('2d'),{
+  type:'doughnut',
+  data:{
+    labels:['logo','IP/吉祥物','VI/手册','新媒体物料','海报/活动','其他'],
+    datasets:[{data:[22,15,15,24,17,7],backgroundColor:['#6672ff','#13d5c3','#ffbe5c','#34d399','#ff4d66','#697699'],borderWidth:0,hoverOffset:6}]
+  },
+  options:{responsive:true,cutout:'62%',plugins:{
+    legend:{position:'bottom',labels:{color:'#9da8c5',font:{size:10},boxWidth:10,padding:8}},
+    tooltip:{callbacks:{label:d=>`${d.label}: ${d.raw}%`}}
+  }}
+});
 new Chart(document.getElementById('lineChart0').getContext('2d'),{type:'line',data:{labels:['W1','W2','W3','W4','W5','W6','W7','W8'],datasets:[{label:'æå(ä¸)',data:[210,245,280,310,290,320,290,315],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.07)',tension:.4,pointRadius:3,borderWidth:2,fill:true},{label:'äºå¨(å)',data:[8.2,9.1,10.5,11.2,9.8,12.1,11.0,12.8],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.06)',tension:.4,pointRadius:3,borderWidth:1.5,fill:true,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS},y1:{position:'right',grid:{display:false},ticks:tS}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}});
 new Chart(document.getElementById('barChart1').getContext('2d'),{type:'bar',data:{labels:['W1','W2','W3','W4','W5','W6'],datasets:[{label:'ç®æ æå',data:[160,165,170,175,180,185],backgroundColor:'rgba(102,114,255,.25)',borderRadius:3},{label:'å®éæå',data:[150,162,175,168,185,178],backgroundColor:'rgba(19,213,195,.4)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:tS},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:9},position:'top',align:'end'}}}});
 new Chart(document.getElementById('barChart1b').getContext('2d'),{type:'bar',data:{labels:['å¾æ','ç­è§é¢','ç´æ­','æ´»å¨H5'],datasets:[{label:'äºå¨ç%',data:[8.3,3.2,5.6,4.8],backgroundColor:['rgba(19,213,195,.5)','rgba(255,77,102,.45)','rgba(102,114,255,.45)','rgba(255,190,92,.45)'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:{display:false},ticks:tS},y:{grid:{color:'rgba(29,42,68,.4)'},ticks:tS}},plugins:{legend:{display:false}}}});
