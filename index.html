@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>品牌组 BI 数字看板</title>
+<title>品宣部 BI 数字看板 V3.0</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *,::before,::after{box-sizing:border-box}
 html,body{margin:0;padding:0;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#04070f;color:#f4f7ff;min-height:100vh}
-:root{--bg:#04070f;--panel:#0b101c;--card:#0f1524;--card2:#111a2d;--border:#1d2a44;--t1:#f4f7ff;--t2:#9da8c5;--t3:#697699;--blue:#6672ff;--teal:#13d5c3;--red:#ff4d66;--amber:#ffbe5c;--green:#34d399;--glow:0 4px 20px rgba(11,17,34,.7)}
+:root{--bg:#04070f;--panel:#0b101c;--card:#0f1524;--card2:#111a2d;--border:#1d2a44;--t1:#f4f7ff;--t2:#9da8c5;--t3:#697699;--blue:#6672ff;--teal:#13d5c3;--red:#ff4d66;--amber:#ffbe5c;--green:#34d399;--purple:#a855f7;--glow:0 4px 20px rgba(11,17,34,.7)}
 body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),transparent 28%),radial-gradient(circle at 85% 5%,rgba(19,213,195,.1),transparent 25%)}
 
 /* NAV */
@@ -139,6 +139,7 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 .inf-row .l{color:var(--t2)}.inf-row .r{font-weight:600}
 
 /* FOOTER */
+.pstat{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid rgba(29,42,68,.3)}.pstat:last-child{border:none}.pstat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}.pstat-name{font-size:13px;font-weight:500;color:var(--t1);flex:1}.pstat-who{font-size:11px;color:var(--t3)}.pstat-tag{font-size:10px}.cp{color:var(--purple)}.pp{background:var(--purple)}.pl.pp{background:rgba(168,85,247,.15);color:var(--purple)}.pv.pp{color:var(--purple)}
 .footer{text-align:center;padding:10px;font-size:9px;color:var(--t3);border-top:1px solid var(--border);margin-top:6px}
 </style>
 </head>
@@ -146,16 +147,16 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 
 <div class="nav">
   <div>
-    <div class="logo">品牌组 BI 数字化大屏</div>
-    <div class="logo-sub">BRAND GROUP MANAGEMENT DASHBOARD V2.0</div>
+    <div class="logo">品宣部 BI 数字化大屏</div>
+    <div class="logo-sub">BRAND DEPT MANAGEMENT DASHBOARD V3.0</div>
   </div>
   <div class="tabs">
     <button class="tab on" onclick="sw('s0',this)">首页总览</button>
     <button class="tab" onclick="sw('s1',this)">品牌运营</button>
     <button class="tab" onclick="sw('s2',this)">品牌设计</button>
-    <button class="tab" onclick="sw('s3',this)">协同看板</button>
-    <button class="tab" onclick="sw('s4',this)">周月复盘</button>
-    <button class="tab" onclick="sw('s5',this)">岗位管理</button>
+    <button class="tab" onclick="sw('s3',this)">品牌拍摄</button>
+    <button class="tab" onclick="sw('s4',this)">新媒体运营</button>
+    <button class="tab" onclick="sw('s5',this)">协同&岗位&复盘</button>
   </div>
   <div class="nr">
     <div class="clk" id="clk">🕐 --:--:--</div>
@@ -176,7 +177,7 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 
 <!-- ═══════════ S0: 首页总览 ═══════════ -->
 <div class="sc on" id="s0">
-  <div class="sec-title">首页总览 · Executive Dashboard · 今日品牌组综合健康度</div>
+  <div class="sec-title">首页总览 · 品宣部核心指标 · 新媒体/竞品/设计/拍摄</div>
 
   <!-- ROW 1: 雷达 | 项目看板 | KPI -->
   <div class="g321" style="align-items:start">
@@ -245,7 +246,42 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
   </div>
 
   <!-- ROW 2 -->
-  <div class="g32">
+  
+<div class="g2">
+  <div class="pnl">
+    <div class="ph">岗位效率对比 <span class="ptag amber">设计 & 拍摄</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px">
+      <div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:8px;text-align:center">品牌设计组</div>
+        <div style="text-align:center;margin-bottom:8px"><div style="font-size:38px;font-weight:700;color:var(--blue)">88</div><div style="font-size:11px;color:var(--t3)">综合评分</div></div>
+        <div class="pr"><div class="pr-hd"><span>准时交付率</span><span class="pv am">87%</span></div><div class="pt"><div class="pf am" style="width:87%"></div></div></div>
+        <div class="pr"><div class="pr-hd"><span>一次过稿率</span><span class="pv bl">75%</span></div><div class="pt"><div class="pf bl" style="width:75%"></div></div></div>
+        <div class="pr"><div class="pr-hd"><span>规范合规率</span><span class="pv tl">91%</span></div><div class="pt"><div class="pf bl" style="width:91%"></div></div></div>
+        <div class="pr"><div class="pr-hd"><span>返工率</span><span class="pv rd">25%</span></div><div class="pt"><div class="pf rd" style="width:25%"></div></div></div>
+      </div>
+      <div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:8px;text-align:center">品牌拍摄组</div>
+        <div style="text-align:center;margin-bottom:8px"><div style="font-size:38px;font-weight:700;color:var(--purple)">92</div><div style="font-size:11px;color:var(--t3)">综合评分</div></div>
+        <div class="pr"><div class="pr-hd"><span>已验收</span><span class="pv gn">10件</span></div><div class="pt"><div class="pf gn" style="width:77%"></div></div></div>
+        <div class="pr"><div class="pr-hd"><span>进行中</span><span class="pv am">2件</span></div><div class="pt"><div class="pf am" style="width:15%"></div></div></div>
+        <div class="pr"><div class="pr-hd"><span>准时交付率</span><span class="pv pp">85%</span></div><div class="pt"><div class="pf pp" style="width:85%"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="pnl">
+    <div class="ph">拍摄组专案进度 <span class="ptag purple">共13项</span></div>
+    <div style="padding:4px 0">
+      <div class="pstat"><div class="pstat-dot" style="background:var(--green)"></div><div class="pstat-name">51短剧 片头片尾</div><div class="pstat-who">小韩</div><span class="pstat-tag pl ok">已验收</span></div>
+      <div class="pstat"><div class="pstat-dot" style="background:var(--green)"></div><div class="pstat-name">黑料不打烊 片头片尾</div><div class="pstat-who">阿尼</div><span class="pstat-tag pl ok">已验收</span></div>
+      <div class="pstat"><div class="pstat-dot" style="background:var(--green)"></div><div class="pstat-name">每日大赛 双旦logo修改</div><div class="pstat-who">阿尼</div><span class="pstat-tag pl ok">已验收</span></div>
+      <div class="pstat"><div class="pstat-dot" style="background:var(--green)"></div><div class="pstat-name">51吃瓜 绿版/黄版视频</div><div class="pstat-who">文森</div><span class="pstat-tag pl ok">已验收</span></div>
+      <div class="pstat"><div class="pstat-dot" style="background:var(--green)"></div><div class="pstat-name">4项目 水印更新×10</div><div class="pstat-who">文森</div><span class="pstat-tag pl ok">已验收</span></div>
+      <div class="pstat"><div class="pstat-dot" style="background:var(--amber)"></div><div class="pstat-name">每日大赛 AI视频模板</div><div class="pstat-who">叶秋/阿尼</div><span class="pstat-tag pl wa">进行中</span></div>
+      <div style="padding:8px 12px;display:flex;gap:16px;font-size:11px;color:var(--t3)"><span>✅已验收 <b style="color:var(--green)">10</b></span><span>🔄进行中 <b style="color:var(--amber)">2</b></span><span>📋总计 <b style="color:var(--t2)">13</b></span></div>
+    </div>
+  </div>
+</div>
+<div class="g32">
     <!-- 环形 -->
     <div class="pnl">
       <div class="ph">需求类型占比 <span class="ptag">本月</span></div>
@@ -669,7 +705,7 @@ body{background-image:radial-gradient(circle at 15% 10%,rgba(102,114,255,.12),tr
 (function t(){const n=new Date(),p=v=>String(v).padStart(2,'0');document.getElementById('clk').textContent='🕐 '+p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());setTimeout(t,1000)})();
 
 // 切换
-const cm={s0:'首页总览',s1:'品牌运营',s2:'品牌设计',s3:'协同看板',s4:'周月复盘',s5:'岗位管理'};
+const cm={s0:'首页总览',s1:'品牌运营',s2:'品牌设计',s3:'品牌拍摄',s4:'新媒体运营',s5:'协同&岗位&复盘'};
 function sw(id,btn){
   document.querySelectorAll('.sc').forEach(s=>s.classList.remove('on'));
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
