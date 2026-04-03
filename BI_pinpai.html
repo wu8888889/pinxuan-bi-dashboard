@@ -152,10 +152,15 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;b
   </div>
 </div>
 
-<div class="g2">
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
   <div class="pnl">
     <div class="ph">4品牌 PV 趋势对比（3月日报）<span class="ptag teal">实时</span></div>
     <div class="ch ch-xl"><canvas id="brandTrend"></canvas></div>
+  </div>
+  <div class="pnl">
+    <div class="ph">5维竞品雷达监控 <span class="ptag" id="pp-radar-date">AI实时</span></div>
+    <div id="pp-radar-summary" style="font-size:10px;color:var(--t3);padding:2px 18px 2px;font-family:'JetBrains Mono',monospace">Pornhub 95% · 麻豆 80% · 海角 65% · MissAV 40% · 我方 85%</div>
+    <div class="ch" style="padding:8px 10px"><canvas id="ppRadarChart"></canvas></div>
   </div>
   <div class="pnl">
     <div class="ph">竞品动态 & 品牌运营建议 <span class="ptag red" id="pp-jinpin-date">2026-04-01</span></div>
@@ -377,6 +382,22 @@ new Chart(document.getElementById('brandTrend').getContext('2d'),{
   options:{responsive:true,maintainAspectRatio:false,scales:{x:{grid:grid4,ticks:tS},y:{grid:grid4,ticks:{...tS,callback:v=>v+'W'}}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:10},boxWidth:10},position:'top',align:'end'}}}
 });
 
+// 5维竞品雷达
+new Chart(document.getElementById('ppRadarChart').getContext('2d'),{
+  type:'radar',
+  data:{
+    labels:['视觉表现','用户互动','内容热度','产品迭代','综合评分'],
+    datasets:[
+      {label:'我方项目',data:[85,80,82,75,85],borderColor:'#6672ff',backgroundColor:'rgba(102,114,255,.12)',pointBackgroundColor:'#6672ff',pointRadius:4,borderWidth:2},
+      {label:'Pornhub',data:[100,100,100,100,95],borderColor:'#13d5c3',backgroundColor:'rgba(19,213,195,.06)',pointBackgroundColor:'#13d5c3',pointRadius:3,borderWidth:1.5,borderDash:[4,3]},
+      {label:'麻豆网',data:[80,80,80,80,80],borderColor:'#ff4d66',backgroundColor:'rgba(255,77,102,.04)',pointBackgroundColor:'#ff4d66',pointRadius:3,borderWidth:1.5,borderDash:[4,3]},
+      {label:'海角网',data:[60,65,70,50,65],borderColor:'#ffbe5c',backgroundColor:'rgba(255,190,92,.04)',pointBackgroundColor:'#ffbe5c',pointRadius:3,borderWidth:1.5,borderDash:[4,3]},
+      {label:'MissAV',data:[40,35,45,30,40],borderColor:'#a855f7',backgroundColor:'rgba(168,85,247,.04)',pointBackgroundColor:'#a855f7',pointRadius:3,borderWidth:1,borderDash:[4,3]}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,scales:{r:{grid:{color:'rgba(255,255,255,.06)'},angleLines:{color:'rgba(255,255,255,.06)'},pointLabels:{color:'#9da8c5',font:{size:10}},ticks:{display:false},suggestedMin:0,suggestedMax:100}},plugins:{legend:{labels:{color:'#9da8c5',font:{size:9},boxWidth:8,padding:6},position:'bottom'}}}
+});
+
 // 环形图
 new Chart(document.getElementById('donutChart').getContext('2d'),{
   type:'doughnut',
@@ -417,6 +438,17 @@ new Chart(document.getElementById('coordBar').getContext('2d'),{
       const ja=$('pp-jinpin-alerts');
       if(ja){let h='';jp.forEach(row=>{const date=row['日期']?new Date(row['日期']).toLocaleDateString('zh-CN'):'';Object.keys(row).filter(k=>k.startsWith('品牌活动_')).forEach(k=>{const brand=k.replace('品牌活动_',''),val=row[k];if(val&&String(val).length>2){const c=brand==='Pornhub'?'var(--amber)':brand==='麻豆'?'var(--red)':brand==='海角'?'var(--blue)':brand==='MissAV'?'var(--purple)':'var(--green)';h+='<div class="ai"><div class="ado" style="background:'+c+'"></div><div class="atx"><span style="font-size:9px;color:var(--t3);font-family:\'JetBrains Mono\',monospace;margin-right:6px">'+date+'</span><b style="color:'+c+'">'+brand+'：</b>'+val+'</div></div>'}})});ja.innerHTML=h}
       const jd=$('pp-jinpin-date');if(jd&&jp[0]['日期'])jd.textContent=new Date(jp[0]['日期']).toLocaleDateString('zh-CN');
+
+      // 5维雷达动态更新
+      const latest=jp[0];
+      if(latest){
+        const rd=$('pp-radar-date');if(rd&&latest['日期'])rd.textContent=new Date(latest['日期']).toLocaleDateString('zh-CN');
+        const rs=$('pp-radar-summary');
+        if(rs){
+          const scores=['Pornhub','麻豆','海角','MissAV'].map(b=>{const v=latest['综合评分_'+b];return b+' '+(typeof v==='number'?Math.round(v*100)+'%':v||'—')}).join(' · ');
+          rs.textContent=scores+' · 我方 85%';
+        }
+      }
     }
 
     // 品牌日报KPI
